@@ -1,0 +1,24 @@
+
+When I coded this, and submitted it into the autograder, I DID NOT get 100% completion on this. I got somewhere around a 92.9/100 (so a 93% basically).
+
+Please do note this when looking into this code. Here is my full test outputs from the autograder:
+
+Failed Tests
+TestRestartMidPreCommit (0/7.1)
+
+Passed Tests
+TestBasicCommit (7.1/7.1)
+TestBasicAbort (7.1/7.1)
+TestEasyRecovery (7.1/7.1)
+TestRelevance (7.1/7.1)
+TestConcurrentDifferentKeys (7.1/7.1)
+TestConcurrentReadSameKeys (7.1/7.1)
+TestConcurrentWriteSameKeys (7.1/7.1)
+TestSerializability (7.1/7.1)
+TestDisconnectPreCommit (7.1/7.1)
+TestDisconnectCommit (7.1/7.1)
+TestRestartPreCommit (7.1/7.1)
+TestRestartCommit (7.1/7.1)
+TestRestartMidCommit (7.1/7.1)
+
+If anyone would like to fix up this code, feel free to branch and do ur own revision to the code.

@@ -1,0 +1,2994 @@
+=== RUN   TestBasicCommit
+TestBasicCommit: Commit when everything is fine ...
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=y
+TID=0 trying Set on key=x
+TID=0 trying write on key=y
+TID=0 attempting 1 operations
+TID=0 ACQUIRED write lock on y
+TID=0 trying Set on key=z
+TID=0 trying write on key=z
+TID=0 ACQUIRED write lock on z
+TID=0 PREPARED successfully
+TID=0 PREPARED successfully
+TID=0 trying write on key=x
+TID=0 ACQUIRED write lock on x
+TID=0 PREPARED successfully
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Coordinator PRECOMMIT TID=0 success=true
+Coordinator START CommitPhase for TID=0
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=0 COMMITTED with values: map[]
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=0 COMMITTED with values: map[]
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=0 COMMITTED with values: map[]
+Coordinator COMMITTED TID=0
+Coordinator ABORTING TID=0
+Coordinator START PreparePhase for TID=1
+Server Prepare START for TID=1
+TID=1 attempting 1 operations
+TID=1 trying Get on key=z
+TID=1 trying read on key=z
+TID=1 ACQUIRED read lock on z
+TID=1 PREPARED successfully
+Server Prepare START for TID=1
+Server Prepare START for TID=1
+TID=1 attempting 1 operations
+TID=1 attempting 1 operations
+TID=1 trying Get on key=x
+TID=1 trying Get on key=y
+TID=1 trying read on key=y
+TID=1 trying read on key=x
+TID=1 ACQUIRED read lock on y
+TID=1 PREPARED successfully
+TID=1 ACQUIRED read lock on x
+TID=1 PREPARED successfully
+Coordinator PREPARED TID=1 success=true
+Coordinator START PreCommitPhase for TID=1
+Coordinator PRECOMMIT TID=1 success=true
+Coordinator START CommitPhase for TID=1
+Server Commit START for TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=z (write=false)
+TID=1 COMMITTED with values: map[z:3]
+Server Commit START for TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=y (write=false)
+TID=1 COMMITTED with values: map[y:2]
+Server Commit START for TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=1 COMMITTED with values: map[x:1]
+Coordinator COMMITTED TID=1
+  ... Passed --   0.0  3   24    2214    0
+--- PASS: TestBasicCommit (0.04s)
+PASS
+ok  	cs351/3pc	1.080s
+=== RUN   TestBasicAbort
+TestBasicAbort: Abort when a server is disconnected ...
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=z
+TID=0 trying write on key=z
+TID=0 ACQUIRED write lock on z
+TID=0 PREPARED successfully
+Server Prepare START for TID=0
+TID=0 trying Set on key=x
+TID=0 attempting 1 operations
+TID=0 trying Set on key=y
+TID=0 trying write on key=x
+TID=0 ACQUIRED write lock on x
+TID=0 PREPARED successfully
+TID=0 trying write on key=y
+TID=0 ACQUIRED write lock on y
+TID=0 PREPARED successfully
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Coordinator PRECOMMIT TID=0 success=true
+Coordinator START CommitPhase for TID=0
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=0 COMMITTED with values: map[]
+Coordinator PRECOMMIT TID=0 success=true
+Coordinator START CommitPhase for TID=0
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=0 COMMITTED with values: map[]
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=0 COMMITTED with values: map[]
+Coordinator COMMITTED TID=0
+Coordinator START PreparePhase for TID=1
+Server Prepare START for TID=1
+TID=1 attempting 1 operations
+TID=1 trying Set on key=z
+Server Prepare START for TID=1
+TID=1 attempting 1 operations
+TID=1 trying write on key=z
+TID=1 trying Set on key=y
+TID=1 ACQUIRED write lock on z
+TID=1 trying write on key=y
+TID=1 ACQUIRED write lock on y
+TID=1 PREPARED successfully
+TID=1 PREPARED successfully
+Coordinator PREPARED TID=1 success=false
+Coordinator ABORTING TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=y (write=true)
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=z (write=true)
+Coordinator START PreparePhase for TID=2
+Server Prepare START for TID=2
+TID=2 attempting 1 operations
+TID=2 trying Get on key=y
+TID=2 trying read on key=y
+TID=2 ACQUIRED read lock on y
+TID=2 PREPARED successfully
+Server Prepare START for TID=2
+TID=2 attempting 1 operations
+TID=2 trying Get on key=z
+TID=2 trying read on key=z
+Server Prepare START for TID=2
+TID=2 attempting 1 operations
+TID=2 trying Get on key=x
+TID=2 trying read on key=x
+TID=2 ACQUIRED read lock on x
+TID=2 PREPARED successfully
+TID=2 ACQUIRED read lock on z
+TID=2 PREPARED successfully
+Coordinator PREPARED TID=2 success=true
+Coordinator START PreCommitPhase for TID=2
+Coordinator PRECOMMIT TID=2 success=true
+Coordinator START CommitPhase for TID=2
+Server Commit START for TID=2
+ROLLBACK TID=2 releasing 1 locks
+Releasing lock on key=y (write=false)
+TID=2 COMMITTED with values: map[y:1]
+Server Commit START for TID=2
+ROLLBACK TID=2 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=2 COMMITTED with values: map[x:1]
+Server Commit START for TID=2
+ROLLBACK TID=2 releasing 1 locks
+Releasing lock on key=z (write=false)
+TID=2 COMMITTED with values: map[z:1]
+Coordinator COMMITTED TID=2
+  ... Passed --   0.2  3   32    2692    0
+--- PASS: TestBasicAbort (0.18s)
+PASS
+ok  	cs351/3pc	1.222s
+=== RUN   TestEasyRecovery
+TestEasyRecovery: Recovery between transactions ...
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=z
+TID=0 trying write on key=z
+TID=0 ACQUIRED write lock on z
+TID=0 PREPARED successfully
+TID=0 trying Set on key=x
+TID=0 trying write on key=x
+TID=0 ACQUIRED write lock on x
+TID=0 PREPARED successfully
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=y
+TID=0 trying write on key=y
+TID=0 ACQUIRED write lock on y
+TID=0 PREPARED successfully
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Coordinator PRECOMMIT TID=0 success=true
+Coordinator START CommitPhase for TID=0
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=0 COMMITTED with values: map[]
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=0 COMMITTED with values: map[]
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=0 COMMITTED with values: map[]
+Coordinator COMMITTED TID=0
+Coordinator ABORTING TID=0
+Coordinator START PreparePhase for TID=1
+Server Prepare START for TID=1
+TID=1 attempting 1 operations
+TID=1 trying Get on key=x
+TID=1 trying read on key=x
+TID=1 ACQUIRED read lock on x
+TID=1 PREPARED successfully
+Server Prepare START for TID=1
+TID=1 attempting 1 operations
+TID=1 trying Get on key=y
+TID=1 trying read on key=y
+TID=1 ACQUIRED read lock on y
+TID=1 PREPARED successfully
+Server Prepare START for TID=1
+TID=1 attempting 1 operations
+TID=1 trying Get on key=z
+TID=1 trying read on key=z
+TID=1 ACQUIRED read lock on z
+TID=1 PREPARED successfully
+Coordinator START PreparePhase for TID=1
+Server Prepare START for TID=1
+Server Prepare START for TID=1
+Server Prepare START for TID=1
+Coordinator PREPARED TID=1 success=true
+Coordinator START PreCommitPhase for TID=1
+Coordinator PREPARED TID=1 success=true
+Coordinator START PreCommitPhase for TID=1
+Coordinator PRECOMMIT TID=1 success=true
+Coordinator START CommitPhase for TID=1
+Server Commit START for TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=1 COMMITTED with values: map[x:1]
+Coordinator PRECOMMIT TID=1 success=true
+Coordinator START CommitPhase for TID=1
+Server Commit START for TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=y (write=false)
+TID=1 COMMITTED with values: map[y:2]
+Server Commit START for TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=z (write=false)
+TID=1 COMMITTED with values: map[z:3]
+Coordinator COMMITTED TID=1
+  ... Passed --   0.0  3   33    2994    0
+--- PASS: TestEasyRecovery (0.04s)
+PASS
+ok  	cs351/3pc	1.080s
+=== RUN   TestRelevance
+TestRelevance: Transaction can still continue if irrelevant server is disconnected after Prepare ...
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=y
+TID=0 trying write on key=y
+TID=0 ACQUIRED write lock on y
+TID=0 PREPARED successfully
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=x
+TID=0 trying write on key=x
+TID=0 ACQUIRED write lock on x
+TID=0 PREPARED successfully
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Coordinator PRECOMMIT TID=0 success=true
+Coordinator START CommitPhase for TID=0
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=0 COMMITTED with values: map[]
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=0 COMMITTED with values: map[]
+Coordinator COMMITTED TID=0
+Coordinator ABORTING TID=0
+  ... Passed --   0.0  3   13    1215    0
+--- PASS: TestRelevance (0.02s)
+PASS
+ok  	cs351/3pc	1.059s
+=== RUN   TestConcurrentDifferentKeys
+TestConcurrentDifferentKeys: Transactions that don't touch the same keys can always succeed concurrently ...
+Coordinator START PreparePhase for TID=0
+Coordinator START PreparePhase for TID=1
+Coordinator START PreparePhase for TID=2
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=x
+TID=0 trying write on key=x
+TID=0 ACQUIRED write lock on x
+TID=0 PREPARED successfully
+Server Prepare START for TID=0
+Server Prepare START for TID=1
+Server Prepare START for TID=2
+Server Prepare START for TID=2
+TID=2 attempting 1 operations
+TID=2 trying Set on key=z
+TID=2 trying write on key=z
+TID=2 ACQUIRED write lock on z
+TID=2 PREPARED successfully
+Server Prepare START for TID=1
+Server Prepare START for TID=1
+TID=1 attempting 1 operations
+TID=1 trying Set on key=y
+Server Prepare START for TID=2
+TID=1 trying write on key=y
+TID=1 ACQUIRED write lock on y
+TID=1 PREPARED successfully
+Coordinator START PreparePhase for TID=2
+Coordinator START PreparePhase for TID=1
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=2
+Server Prepare START for TID=2
+Server Prepare START for TID=2
+Server Prepare START for TID=0
+Server Prepare START for TID=1
+Server Prepare START for TID=1
+Server Prepare START for TID=1
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator PREPARED TID=1 success=true
+Coordinator START PreCommitPhase for TID=1
+Coordinator PREPARED TID=2 success=true
+Coordinator START PreCommitPhase for TID=2
+Coordinator START PreCommitPhase for TID=0
+Coordinator PRECOMMIT TID=1 success=true
+Coordinator START CommitPhase for TID=1
+Coordinator PRECOMMIT TID=2 success=true
+Coordinator START CommitPhase for TID=2
+Coordinator PRECOMMIT TID=0 success=true
+Coordinator START CommitPhase for TID=0
+Server Commit START for TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=1 COMMITTED with values: map[]
+Coordinator COMMITTED TID=1
+Server Commit START for TID=2
+ROLLBACK TID=2 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=2 COMMITTED with values: map[]
+Coordinator COMMITTED TID=2
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=0 COMMITTED with values: map[]
+Coordinator COMMITTED TID=0
+Coordinator PREPARED TID=1 success=true
+Coordinator PREPARED TID=2 success=true
+Coordinator START PreCommitPhase for TID=1
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Coordinator ABORTING TID=0
+Coordinator ABORTING TID=1
+Coordinator START PreparePhase for TID=5
+Coordinator START PreparePhase for TID=4
+Coordinator START PreparePhase for TID=3
+Server Prepare START for TID=5
+TID=5 attempting 1 operations
+Server Prepare START for TID=5
+TID=5 trying Set on key=z
+TID=5 trying write on key=z
+TID=5 ACQUIRED write lock on z
+TID=5 PREPARED successfully
+Server Prepare START for TID=3
+Server Prepare START for TID=4
+Server Prepare START for TID=5
+Server Prepare START for TID=3
+Server Prepare START for TID=4
+Server Prepare START for TID=4
+TID=4 attempting 1 operations
+TID=4 trying Set on key=y
+TID=4 trying write on key=y
+TID=4 ACQUIRED write lock on y
+TID=4 PREPARED successfully
+Server Prepare START for TID=3
+TID=3 attempting 1 operations
+TID=3 trying Set on key=x
+TID=3 trying write on key=x
+TID=3 ACQUIRED write lock on x
+TID=3 PREPARED successfully
+Coordinator PREPARED TID=5 success=true
+Coordinator PREPARED TID=4 success=true
+Coordinator START PreCommitPhase for TID=5
+Coordinator START PreCommitPhase for TID=4
+Coordinator PREPARED TID=3 success=true
+Coordinator START PreCommitPhase for TID=3
+Coordinator PRECOMMIT TID=3 success=true
+Coordinator START CommitPhase for TID=3
+Coordinator PRECOMMIT TID=5 success=true
+Coordinator PRECOMMIT TID=4 success=true
+Coordinator START CommitPhase for TID=4
+Coordinator START CommitPhase for TID=5
+Server Commit START for TID=3
+ROLLBACK TID=3 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=3 COMMITTED with values: map[]
+Coordinator COMMITTED TID=3
+Server Commit START for TID=4
+ROLLBACK TID=4 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=4 COMMITTED with values: map[]
+Coordinator COMMITTED TID=4
+Server Commit START for TID=5
+ROLLBACK TID=5 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=5 COMMITTED with values: map[]
+Coordinator COMMITTED TID=5
+Coordinator START PreparePhase for TID=8
+Coordinator START PreparePhase for TID=7
+Coordinator START PreparePhase for TID=6
+Server Prepare START for TID=8
+TID=8 attempting 1 operations
+TID=8 trying Set on key=z
+TID=8 trying write on key=z
+TID=8 ACQUIRED write lock on z
+TID=8 PREPARED successfully
+Server Prepare START for TID=8
+Server Prepare START for TID=7
+TID=7 attempting 1 operations
+TID=7 trying Set on key=y
+TID=7 trying write on key=y
+TID=7 ACQUIRED write lock on y
+TID=7 PREPARED successfully
+Server Prepare START for TID=6
+Server Prepare START for TID=6
+Server Prepare START for TID=6
+TID=6 attempting 1 operations
+TID=6 trying Set on key=x
+TID=6 trying write on key=x
+TID=6 ACQUIRED write lock on x
+TID=6 PREPARED successfully
+Server Prepare START for TID=7
+Server Prepare START for TID=7
+Server Prepare START for TID=8
+Coordinator PREPARED TID=8 success=true
+Coordinator PREPARED TID=7 success=true
+Coordinator START PreCommitPhase for TID=7
+Coordinator START PreCommitPhase for TID=8
+Coordinator PREPARED TID=6 success=true
+Coordinator START PreCommitPhase for TID=6
+Coordinator PRECOMMIT TID=8 success=true
+Coordinator START CommitPhase for TID=8
+Coordinator PRECOMMIT TID=7 success=true
+Coordinator START CommitPhase for TID=7
+Coordinator PRECOMMIT TID=6 success=true
+Coordinator START CommitPhase for TID=6
+Server Commit START for TID=8
+ROLLBACK TID=8 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=8 COMMITTED with values: map[]
+Coordinator COMMITTED TID=8
+Server Commit START for TID=7
+ROLLBACK TID=7 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=7 COMMITTED with values: map[]
+Coordinator COMMITTED TID=7
+Server Commit START for TID=6
+ROLLBACK TID=6 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=6 COMMITTED with values: map[]
+Coordinator COMMITTED TID=6
+Coordinator START PreparePhase for TID=10
+Coordinator START PreparePhase for TID=11
+Coordinator START PreparePhase for TID=9
+Server Prepare START for TID=11
+Server Prepare START for TID=11
+Server Prepare START for TID=10
+Server Prepare START for TID=9
+TID=9 attempting 1 operations
+TID=9 trying Set on key=x
+TID=9 trying write on key=x
+TID=9 ACQUIRED write lock on x
+TID=9 PREPARED successfully
+Server Prepare START for TID=10
+Server Prepare START for TID=10
+TID=10 attempting 1 operations
+TID=10 trying Set on key=y
+TID=10 trying write on key=y
+TID=10 ACQUIRED write lock on y
+TID=10 PREPARED successfully
+Server Prepare START for TID=9
+Server Prepare START for TID=9
+Server Prepare START for TID=11
+TID=11 attempting 1 operations
+TID=11 trying Set on key=z
+TID=11 trying write on key=z
+TID=11 ACQUIRED write lock on z
+TID=11 PREPARED successfully
+Coordinator PREPARED TID=11 success=true
+Coordinator PREPARED TID=10 success=true
+Coordinator START PreCommitPhase for TID=10
+Coordinator START PreCommitPhase for TID=11
+Coordinator PREPARED TID=9 success=true
+Coordinator START PreCommitPhase for TID=9
+Coordinator PRECOMMIT TID=9 success=true
+Coordinator START CommitPhase for TID=9
+Coordinator PRECOMMIT TID=10 success=true
+Coordinator START CommitPhase for TID=10
+Coordinator PRECOMMIT TID=11 success=true
+Coordinator START CommitPhase for TID=11
+Server Commit START for TID=9
+ROLLBACK TID=9 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=9 COMMITTED with values: map[]
+Coordinator COMMITTED TID=9
+Server Commit START for TID=10
+ROLLBACK TID=10 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=10 COMMITTED with values: map[]
+Coordinator COMMITTED TID=10
+Server Commit START for TID=11
+ROLLBACK TID=11 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=11 COMMITTED with values: map[]
+Coordinator COMMITTED TID=11
+Coordinator START PreparePhase for TID=12
+Coordinator START PreparePhase for TID=14
+Coordinator START PreparePhase for TID=13
+Server Prepare START for TID=12
+TID=12 attempting 1 operations
+TID=12 trying Set on key=x
+TID=12 trying write on key=x
+TID=12 ACQUIRED write lock on x
+TID=12 PREPARED successfully
+Server Prepare START for TID=12
+Server Prepare START for TID=14
+Server Prepare START for TID=14
+TID=14 attempting 1 operations
+TID=14 trying Set on key=z
+Server Prepare START for TID=14
+TID=14 trying write on key=z
+TID=14 ACQUIRED write lock on z
+TID=14 PREPARED successfully
+Server Prepare START for TID=13
+Server Prepare START for TID=13
+Server Prepare START for TID=13
+TID=13 attempting 1 operations
+TID=13 trying Set on key=y
+TID=13 trying write on key=y
+TID=13 ACQUIRED write lock on y
+TID=13 PREPARED successfully
+Server Prepare START for TID=12
+Coordinator PREPARED TID=14 success=true
+Coordinator PREPARED TID=13 success=true
+Coordinator START PreCommitPhase for TID=13
+Coordinator PREPARED TID=12 success=true
+Coordinator START PreCommitPhase for TID=12
+Coordinator START PreCommitPhase for TID=14
+Coordinator PRECOMMIT TID=13 success=true
+Coordinator START CommitPhase for TID=13
+Coordinator PRECOMMIT TID=12 success=true
+Coordinator START CommitPhase for TID=12
+Coordinator PRECOMMIT TID=14 success=true
+Coordinator START CommitPhase for TID=14
+Server Commit START for TID=13
+ROLLBACK TID=13 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=13 COMMITTED with values: map[]
+Coordinator COMMITTED TID=13
+Server Commit START for TID=12
+ROLLBACK TID=12 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=12 COMMITTED with values: map[]
+Coordinator COMMITTED TID=12
+Server Commit START for TID=14
+ROLLBACK TID=14 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=14 COMMITTED with values: map[]
+Coordinator COMMITTED TID=14
+Coordinator START PreparePhase for TID=15
+Coordinator START PreparePhase for TID=17
+Coordinator START PreparePhase for TID=16
+Server Prepare START for TID=15
+Server Prepare START for TID=15
+TID=15 attempting 1 operations
+TID=15 trying Set on key=x
+TID=15 trying write on key=x
+TID=15 ACQUIRED write lock on x
+TID=15 PREPARED successfully
+Server Prepare START for TID=16
+Server Prepare START for TID=17
+TID=17 attempting 1 operations
+TID=17 trying Set on key=z
+TID=17 trying write on key=z
+TID=17 ACQUIRED write lock on z
+TID=17 PREPARED successfully
+Server Prepare START for TID=15
+Server Prepare START for TID=16
+Server Prepare START for TID=17
+Server Prepare START for TID=17
+Server Prepare START for TID=16
+TID=16 attempting 1 operations
+TID=16 trying Set on key=y
+TID=16 trying write on key=y
+TID=16 ACQUIRED write lock on y
+TID=16 PREPARED successfully
+Coordinator PREPARED TID=16 success=true
+Coordinator START PreCommitPhase for TID=16
+Coordinator PREPARED TID=15 success=true
+Coordinator START PreCommitPhase for TID=15
+Coordinator PREPARED TID=17 success=true
+Coordinator START PreCommitPhase for TID=17
+Coordinator PRECOMMIT TID=15 success=true
+Coordinator START CommitPhase for TID=15
+Coordinator PRECOMMIT TID=16 success=true
+Coordinator START CommitPhase for TID=16
+Coordinator PRECOMMIT TID=17 success=true
+Coordinator START CommitPhase for TID=17
+Server Commit START for TID=15
+ROLLBACK TID=15 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=15 COMMITTED with values: map[]
+Coordinator COMMITTED TID=15
+Server Commit START for TID=16
+ROLLBACK TID=16 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=16 COMMITTED with values: map[]
+Coordinator COMMITTED TID=16
+Server Commit START for TID=17
+ROLLBACK TID=17 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=17 COMMITTED with values: map[]
+Coordinator COMMITTED TID=17
+Coordinator START PreparePhase for TID=18
+Coordinator START PreparePhase for TID=19
+Coordinator START PreparePhase for TID=20
+Server Prepare START for TID=18
+Server Prepare START for TID=20
+Server Prepare START for TID=19
+TID=19 attempting 1 operations
+TID=19 trying Set on key=y
+TID=19 trying write on key=y
+TID=19 ACQUIRED write lock on y
+TID=19 PREPARED successfully
+Server Prepare START for TID=18
+TID=18 attempting 1 operations
+TID=18 trying Set on key=x
+TID=18 trying write on key=x
+TID=18 ACQUIRED write lock on x
+TID=18 PREPARED successfully
+Server Prepare START for TID=20
+TID=20 attempting 1 operations
+TID=20 trying Set on key=z
+TID=20 trying write on key=z
+TID=20 ACQUIRED write lock on z
+TID=20 PREPARED successfully
+Server Prepare START for TID=18
+Server Prepare START for TID=19
+Server Prepare START for TID=19
+Server Prepare START for TID=20
+Coordinator PREPARED TID=20 success=true
+Coordinator PREPARED TID=19 success=true
+Coordinator START PreCommitPhase for TID=19
+Coordinator START PreCommitPhase for TID=20
+Coordinator PREPARED TID=18 success=true
+Coordinator START PreCommitPhase for TID=18
+Coordinator PRECOMMIT TID=20 success=true
+Coordinator START CommitPhase for TID=20
+Coordinator PRECOMMIT TID=19 success=true
+Coordinator START CommitPhase for TID=19
+Coordinator PRECOMMIT TID=18 success=true
+Coordinator START CommitPhase for TID=18
+Server Commit START for TID=20
+ROLLBACK TID=20 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=20 COMMITTED with values: map[]
+Coordinator COMMITTED TID=20
+Server Commit START for TID=19
+ROLLBACK TID=19 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=19 COMMITTED with values: map[]
+Coordinator COMMITTED TID=19
+Server Commit START for TID=18
+ROLLBACK TID=18 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=18 COMMITTED with values: map[]
+Coordinator COMMITTED TID=18
+Coordinator START PreparePhase for TID=22
+Coordinator START PreparePhase for TID=21
+Coordinator START PreparePhase for TID=23
+Server Prepare START for TID=22
+Server Prepare START for TID=22
+Server Prepare START for TID=22
+TID=22 attempting 1 operations
+TID=22 trying Set on key=y
+TID=22 trying write on key=y
+TID=22 ACQUIRED write lock on y
+TID=22 PREPARED successfully
+Server Prepare START for TID=23
+Server Prepare START for TID=21
+TID=21 attempting 1 operations
+TID=21 trying Set on key=x
+TID=21 trying write on key=x
+TID=21 ACQUIRED write lock on x
+TID=21 PREPARED successfully
+Server Prepare START for TID=21
+Server Prepare START for TID=21
+Server Prepare START for TID=23
+TID=23 attempting 1 operations
+TID=23 trying Set on key=z
+TID=23 trying write on key=z
+TID=23 ACQUIRED write lock on z
+TID=23 PREPARED successfully
+Server Prepare START for TID=23
+Coordinator PREPARED TID=21 success=true
+Coordinator PREPARED TID=22 success=true
+Coordinator START PreCommitPhase for TID=22
+Coordinator PREPARED TID=23 success=true
+Coordinator START PreCommitPhase for TID=23
+Coordinator START PreCommitPhase for TID=21
+Coordinator PRECOMMIT TID=21 success=true
+Coordinator START CommitPhase for TID=21
+Coordinator PRECOMMIT TID=22 success=true
+Coordinator PRECOMMIT TID=23 success=true
+Coordinator START CommitPhase for TID=22
+Coordinator START CommitPhase for TID=23
+Server Commit START for TID=21
+ROLLBACK TID=21 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=21 COMMITTED with values: map[]
+Coordinator COMMITTED TID=21
+Server Commit START for TID=22
+ROLLBACK TID=22 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=22 COMMITTED with values: map[]
+Coordinator COMMITTED TID=22
+Server Commit START for TID=23
+ROLLBACK TID=23 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=23 COMMITTED with values: map[]
+Coordinator COMMITTED TID=23
+Coordinator START PreparePhase for TID=24
+Coordinator START PreparePhase for TID=25
+Coordinator START PreparePhase for TID=26
+Server Prepare START for TID=25
+TID=25 attempting 1 operations
+TID=25 trying Set on key=y
+TID=25 trying write on key=y
+TID=25 ACQUIRED write lock on y
+TID=25 PREPARED successfully
+Server Prepare START for TID=25
+Server Prepare START for TID=25
+Server Prepare START for TID=26
+Server Prepare START for TID=26
+TID=26 attempting 1 operations
+TID=26 trying Set on key=z
+TID=26 trying write on key=z
+TID=26 ACQUIRED write lock on z
+TID=26 PREPARED successfully
+Server Prepare START for TID=24
+Server Prepare START for TID=24
+Server Prepare START for TID=24
+TID=24 attempting 1 operations
+TID=24 trying Set on key=x
+TID=24 trying write on key=x
+TID=24 ACQUIRED write lock on x
+TID=24 PREPARED successfully
+Server Prepare START for TID=26
+Coordinator PREPARED TID=25 success=true
+Coordinator PREPARED TID=26 success=true
+Coordinator START PreCommitPhase for TID=26
+Coordinator PREPARED TID=24 success=true
+Coordinator START PreCommitPhase for TID=24
+Coordinator START PreCommitPhase for TID=25
+Coordinator PRECOMMIT TID=25 success=true
+Coordinator START CommitPhase for TID=25
+Coordinator PRECOMMIT TID=26 success=true
+Coordinator START CommitPhase for TID=26
+Coordinator PRECOMMIT TID=24 success=true
+Coordinator START CommitPhase for TID=24
+Server Commit START for TID=25
+ROLLBACK TID=25 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=25 COMMITTED with values: map[]
+Coordinator COMMITTED TID=25
+Server Commit START for TID=26
+ROLLBACK TID=26 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=26 COMMITTED with values: map[]
+Coordinator COMMITTED TID=26
+Server Commit START for TID=24
+ROLLBACK TID=24 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=24 COMMITTED with values: map[]
+Coordinator COMMITTED TID=24
+Coordinator START PreparePhase for TID=27
+Coordinator START PreparePhase for TID=28
+Coordinator START PreparePhase for TID=29
+Server Prepare START for TID=27
+Server Prepare START for TID=29
+Server Prepare START for TID=27
+Server Prepare START for TID=28
+Server Prepare START for TID=28
+TID=28 attempting 1 operations
+TID=28 trying Set on key=y
+TID=28 trying write on key=y
+TID=28 ACQUIRED write lock on y
+TID=28 PREPARED successfully
+Server Prepare START for TID=29
+Server Prepare START for TID=28
+Server Prepare START for TID=27
+TID=27 attempting 1 operations
+TID=27 trying Set on key=x
+TID=27 trying write on key=x
+TID=27 ACQUIRED write lock on x
+TID=27 PREPARED successfully
+Server Prepare START for TID=29
+TID=29 attempting 1 operations
+TID=29 trying Set on key=z
+TID=29 trying write on key=z
+TID=29 ACQUIRED write lock on z
+TID=29 PREPARED successfully
+Coordinator PREPARED TID=27 success=true
+Coordinator START PreCommitPhase for TID=27
+Coordinator PREPARED TID=29 success=true
+Coordinator START PreCommitPhase for TID=29
+Coordinator PREPARED TID=28 success=true
+Coordinator START PreCommitPhase for TID=28
+Coordinator PRECOMMIT TID=27 success=true
+Coordinator START CommitPhase for TID=27
+Server Commit START for TID=27
+ROLLBACK TID=27 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=27 COMMITTED with values: map[]
+Coordinator PRECOMMIT TID=28 success=true
+Coordinator START CommitPhase for TID=28
+Coordinator PRECOMMIT TID=29 success=true
+Coordinator START CommitPhase for TID=29
+Coordinator COMMITTED TID=27
+Server Commit START for TID=28
+ROLLBACK TID=28 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=28 COMMITTED with values: map[]
+Coordinator COMMITTED TID=28
+Server Commit START for TID=29
+ROLLBACK TID=29 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=29 COMMITTED with values: map[]
+Coordinator COMMITTED TID=29
+  ... Passed --   0.2  3  162   14360    0
+--- PASS: TestConcurrentDifferentKeys (0.21s)
+PASS
+ok  	cs351/3pc	1.245s
+=== RUN   TestConcurrentReadSameKeys
+TestConcurrentReadSameKeys: Transactions that only read the same keys can always succeed concurrently ...
+Coordinator START PreparePhase for TID=1
+Coordinator START PreparePhase for TID=0
+Coordinator START PreparePhase for TID=2
+Server Prepare START for TID=0
+Server Prepare START for TID=2
+TID=2 attempting 1 operations
+TID=2 trying Get on key=x
+TID=2 trying read on key=x
+Server Prepare START for TID=2
+TID=2 ACQUIRED read lock on x
+TID=2 PREPARED successfully
+Server Prepare START for TID=1
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=2
+Server Prepare START for TID=1
+TID=0 attempting 1 operations
+TID=0 trying Get on key=x
+TID=0 trying read on key=x
+TID=0 ACQUIRED read lock on x
+TID=0 PREPARED successfully
+Server Prepare START for TID=1
+TID=1 attempting 1 operations
+TID=1 trying Get on key=x
+TID=1 trying read on key=x
+TID=1 ACQUIRED read lock on x
+TID=1 PREPARED successfully
+Coordinator START PreparePhase for TID=1
+Coordinator START PreparePhase for TID=0
+Coordinator START PreparePhase for TID=2
+Server Prepare START for TID=2
+Server Prepare START for TID=1
+Server Prepare START for TID=0
+Server Prepare START for TID=1
+Server Prepare START for TID=2
+Server Prepare START for TID=0
+Server Prepare START for TID=1
+Server Prepare START for TID=0
+Server Prepare START for TID=2
+Coordinator PREPARED TID=0 success=true
+Coordinator PREPARED TID=1 success=true
+Coordinator PREPARED TID=2 success=true
+Coordinator START PreCommitPhase for TID=0
+Coordinator START PreCommitPhase for TID=1
+Coordinator START PreCommitPhase for TID=2
+Coordinator PRECOMMIT TID=0 success=true
+Coordinator START CommitPhase for TID=0
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=0 COMMITTED with values: map[x:<nil>]
+Coordinator PRECOMMIT TID=2 success=true
+Coordinator START CommitPhase for TID=2
+Coordinator PRECOMMIT TID=1 success=true
+Coordinator START CommitPhase for TID=1
+Coordinator COMMITTED TID=0
+Server Commit START for TID=2
+ROLLBACK TID=2 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=2 COMMITTED with values: map[x:<nil>]
+Coordinator COMMITTED TID=2
+Server Commit START for TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=1 COMMITTED with values: map[x:<nil>]
+Coordinator COMMITTED TID=1
+Coordinator PREPARED TID=1 success=true
+Coordinator PREPARED TID=0 success=true
+Coordinator PREPARED TID=2 success=true
+Coordinator START PreCommitPhase for TID=2
+Coordinator ABORTING TID=2
+Coordinator START PreparePhase for TID=5
+Coordinator START PreparePhase for TID=3
+Coordinator START PreparePhase for TID=4
+Server Prepare START for TID=5
+Server Prepare START for TID=5
+Server Prepare START for TID=3
+Server Prepare START for TID=4
+Server Prepare START for TID=3
+TID=3 attempting 1 operations
+TID=3 trying Get on key=y
+TID=3 trying read on key=y
+TID=3 ACQUIRED read lock on y
+TID=3 PREPARED successfully
+Server Prepare START for TID=3
+Server Prepare START for TID=5
+TID=5 attempting 1 operations
+TID=5 trying Get on key=y
+TID=5 trying read on key=y
+TID=5 ACQUIRED read lock on y
+TID=5 PREPARED successfully
+Server Prepare START for TID=4
+Server Prepare START for TID=4
+TID=4 attempting 1 operations
+TID=4 trying Get on key=y
+TID=4 trying read on key=y
+TID=4 ACQUIRED read lock on y
+TID=4 PREPARED successfully
+Coordinator PREPARED TID=3 success=true
+Coordinator START PreCommitPhase for TID=3
+Coordinator PREPARED TID=5 success=true
+Coordinator START PreCommitPhase for TID=5
+Coordinator PREPARED TID=4 success=true
+Coordinator START PreCommitPhase for TID=4
+Coordinator PRECOMMIT TID=4 success=true
+Coordinator START CommitPhase for TID=4
+Coordinator PRECOMMIT TID=3 success=true
+Coordinator START CommitPhase for TID=3
+Coordinator PRECOMMIT TID=5 success=true
+Coordinator START CommitPhase for TID=5
+Server Commit START for TID=4
+ROLLBACK TID=4 releasing 1 locks
+Releasing lock on key=y (write=false)
+TID=4 COMMITTED with values: map[y:<nil>]
+Coordinator COMMITTED TID=4
+Server Commit START for TID=3
+ROLLBACK TID=3 releasing 1 locks
+Releasing lock on key=y (write=false)
+TID=3 COMMITTED with values: map[y:<nil>]
+Coordinator COMMITTED TID=3
+Server Commit START for TID=5
+ROLLBACK TID=5 releasing 1 locks
+Releasing lock on key=y (write=false)
+TID=5 COMMITTED with values: map[y:<nil>]
+Coordinator COMMITTED TID=5
+Coordinator START PreparePhase for TID=8
+Coordinator START PreparePhase for TID=6
+Coordinator START PreparePhase for TID=7
+Server Prepare START for TID=8
+Server Prepare START for TID=8
+TID=8 attempting 1 operations
+TID=8 trying Get on key=z
+TID=8 trying read on key=z
+TID=8 ACQUIRED read lock on z
+TID=8 PREPARED successfully
+Server Prepare START for TID=8
+Server Prepare START for TID=7
+Server Prepare START for TID=6
+TID=6 attempting 1 operations
+Server Prepare START for TID=6
+TID=6 trying Get on key=z
+TID=6 trying read on key=z
+TID=6 ACQUIRED read lock on z
+TID=6 PREPARED successfully
+Server Prepare START for TID=7
+Server Prepare START for TID=6
+Server Prepare START for TID=7
+TID=7 attempting 1 operations
+TID=7 trying Get on key=z
+TID=7 trying read on key=z
+TID=7 ACQUIRED read lock on z
+TID=7 PREPARED successfully
+Coordinator PREPARED TID=6 success=true
+Coordinator START PreCommitPhase for TID=6
+Coordinator PREPARED TID=7 success=true
+Coordinator START PreCommitPhase for TID=7
+Coordinator PREPARED TID=8 success=true
+Coordinator START PreCommitPhase for TID=8
+Coordinator PRECOMMIT TID=8 success=true
+Coordinator START CommitPhase for TID=8
+Coordinator PRECOMMIT TID=7 success=true
+Coordinator START CommitPhase for TID=7
+Coordinator PRECOMMIT TID=6 success=true
+Coordinator START CommitPhase for TID=6
+Server Commit START for TID=8
+ROLLBACK TID=8 releasing 1 locks
+Releasing lock on key=z (write=false)
+TID=8 COMMITTED with values: map[z:<nil>]
+Coordinator COMMITTED TID=8
+Server Commit START for TID=7
+ROLLBACK TID=7 releasing 1 locks
+Releasing lock on key=z (write=false)
+TID=7 COMMITTED with values: map[z:<nil>]
+Coordinator COMMITTED TID=7
+Server Commit START for TID=6
+ROLLBACK TID=6 releasing 1 locks
+Releasing lock on key=z (write=false)
+TID=6 COMMITTED with values: map[z:<nil>]
+Coordinator COMMITTED TID=6
+Coordinator START PreparePhase for TID=9
+Coordinator START PreparePhase for TID=10
+Coordinator START PreparePhase for TID=11
+Server Prepare START for TID=11
+TID=11 attempting 1 operations
+TID=11 trying Get on key=x
+TID=11 trying read on key=x
+TID=11 ACQUIRED read lock on x
+TID=11 PREPARED successfully
+Server Prepare START for TID=10
+TID=10 attempting 1 operations
+TID=10 trying Get on key=x
+TID=10 trying read on key=x
+TID=10 ACQUIRED read lock on x
+TID=10 PREPARED successfully
+Server Prepare START for TID=10
+Server Prepare START for TID=9
+Server Prepare START for TID=10
+Server Prepare START for TID=11
+Server Prepare START for TID=11
+Server Prepare START for TID=9
+TID=9 attempting 1 operations
+TID=9 trying Get on key=x
+TID=9 trying read on key=x
+TID=9 ACQUIRED read lock on x
+TID=9 PREPARED successfully
+Server Prepare START for TID=9
+Coordinator PREPARED TID=10 success=true
+Coordinator PREPARED TID=9 success=true
+Coordinator START PreCommitPhase for TID=9
+Coordinator PREPARED TID=11 success=true
+Coordinator START PreCommitPhase for TID=11
+Coordinator START PreCommitPhase for TID=10
+Coordinator PRECOMMIT TID=9 success=true
+Coordinator START CommitPhase for TID=9
+Coordinator PRECOMMIT TID=11 success=true
+Coordinator START CommitPhase for TID=11
+Coordinator PRECOMMIT TID=10 success=true
+Coordinator START CommitPhase for TID=10
+Server Commit START for TID=9
+ROLLBACK TID=9 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=9 COMMITTED with values: map[x:<nil>]
+Coordinator COMMITTED TID=9
+Server Commit START for TID=11
+ROLLBACK TID=11 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=11 COMMITTED with values: map[x:<nil>]
+Coordinator COMMITTED TID=11
+Server Commit START for TID=10
+ROLLBACK TID=10 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=10 COMMITTED with values: map[x:<nil>]
+Coordinator COMMITTED TID=10
+Coordinator START PreparePhase for TID=14
+Coordinator START PreparePhase for TID=13
+Coordinator START PreparePhase for TID=12
+Server Prepare START for TID=13
+Server Prepare START for TID=14
+Server Prepare START for TID=12
+Server Prepare START for TID=14
+TID=14 attempting 1 operations
+TID=14 trying Get on key=y
+TID=14 trying read on key=y
+TID=14 ACQUIRED read lock on y
+TID=14 PREPARED successfully
+Server Prepare START for TID=12
+Server Prepare START for TID=14
+Server Prepare START for TID=13
+Server Prepare START for TID=13
+TID=13 attempting 1 operations
+TID=13 trying Get on key=y
+TID=13 trying read on key=y
+TID=13 ACQUIRED read lock on y
+TID=13 PREPARED successfully
+Server Prepare START for TID=12
+TID=12 attempting 1 operations
+TID=12 trying Get on key=y
+TID=12 trying read on key=y
+TID=12 ACQUIRED read lock on y
+TID=12 PREPARED successfully
+Coordinator PREPARED TID=13 success=true
+Coordinator PREPARED TID=12 success=true
+Coordinator PREPARED TID=14 success=true
+Coordinator START PreCommitPhase for TID=12
+Coordinator START PreCommitPhase for TID=14
+Coordinator START PreCommitPhase for TID=13
+Coordinator PRECOMMIT TID=14 success=true
+Coordinator START CommitPhase for TID=14
+Coordinator PRECOMMIT TID=12 success=true
+Coordinator START CommitPhase for TID=12
+Coordinator PRECOMMIT TID=13 success=true
+Coordinator START CommitPhase for TID=13
+Server Commit START for TID=14
+ROLLBACK TID=14 releasing 1 locks
+Releasing lock on key=y (write=false)
+TID=14 COMMITTED with values: map[y:<nil>]
+Coordinator COMMITTED TID=14
+Server Commit START for TID=12
+ROLLBACK TID=12 releasing 1 locks
+Releasing lock on key=y (write=false)
+TID=12 COMMITTED with values: map[y:<nil>]
+Coordinator COMMITTED TID=12
+Server Commit START for TID=13
+ROLLBACK TID=13 releasing 1 locks
+Releasing lock on key=y (write=false)
+TID=13 COMMITTED with values: map[y:<nil>]
+Coordinator COMMITTED TID=13
+Coordinator START PreparePhase for TID=17
+Coordinator START PreparePhase for TID=16
+Coordinator START PreparePhase for TID=15
+Server Prepare START for TID=17
+Server Prepare START for TID=16
+Server Prepare START for TID=15
+Server Prepare START for TID=15
+TID=15 attempting 1 operations
+TID=15 trying Get on key=z
+TID=15 trying read on key=z
+TID=15 ACQUIRED read lock on z
+TID=15 PREPARED successfully
+Server Prepare START for TID=16
+TID=16 attempting 1 operations
+TID=16 trying Get on key=z
+TID=16 trying read on key=z
+TID=16 ACQUIRED read lock on z
+TID=16 PREPARED successfully
+Server Prepare START for TID=17
+TID=17 attempting 1 operations
+TID=17 trying Get on key=z
+TID=17 trying read on key=z
+TID=17 ACQUIRED read lock on z
+TID=17 PREPARED successfully
+Server Prepare START for TID=16
+Server Prepare START for TID=15
+Server Prepare START for TID=17
+Coordinator PREPARED TID=15 success=true
+Coordinator START PreCommitPhase for TID=15
+Coordinator PREPARED TID=17 success=true
+Coordinator START PreCommitPhase for TID=17
+Coordinator PREPARED TID=16 success=true
+Coordinator START PreCommitPhase for TID=16
+Coordinator PRECOMMIT TID=15 success=true
+Coordinator START CommitPhase for TID=15
+Coordinator PRECOMMIT TID=17 success=true
+Coordinator START CommitPhase for TID=17
+Coordinator PRECOMMIT TID=16 success=true
+Coordinator START CommitPhase for TID=16
+Server Commit START for TID=15
+ROLLBACK TID=15 releasing 1 locks
+Releasing lock on key=z (write=false)
+TID=15 COMMITTED with values: map[z:<nil>]
+Coordinator COMMITTED TID=15
+Server Commit START for TID=17
+ROLLBACK TID=17 releasing 1 locks
+Releasing lock on key=z (write=false)
+TID=17 COMMITTED with values: map[z:<nil>]
+Coordinator COMMITTED TID=17
+Server Commit START for TID=16
+ROLLBACK TID=16 releasing 1 locks
+Releasing lock on key=z (write=false)
+TID=16 COMMITTED with values: map[z:<nil>]
+Coordinator COMMITTED TID=16
+Coordinator START PreparePhase for TID=18
+Coordinator START PreparePhase for TID=20
+Coordinator START PreparePhase for TID=19
+Server Prepare START for TID=18
+Server Prepare START for TID=19
+Server Prepare START for TID=19
+TID=19 attempting 1 operations
+TID=19 trying Get on key=x
+Server Prepare START for TID=20
+TID=19 trying read on key=x
+TID=19 ACQUIRED read lock on x
+TID=19 PREPARED successfully
+Server Prepare START for TID=19
+Server Prepare START for TID=18
+TID=18 attempting 1 operations
+TID=18 trying Get on key=x
+TID=18 trying read on key=x
+TID=18 ACQUIRED read lock on x
+TID=18 PREPARED successfully
+Server Prepare START for TID=18
+Server Prepare START for TID=20
+Server Prepare START for TID=20
+TID=20 attempting 1 operations
+TID=20 trying Get on key=x
+TID=20 trying read on key=x
+TID=20 ACQUIRED read lock on x
+TID=20 PREPARED successfully
+Coordinator PREPARED TID=19 success=true
+Coordinator PREPARED TID=20 success=true
+Coordinator PREPARED TID=18 success=true
+Coordinator START PreCommitPhase for TID=18
+Coordinator START PreCommitPhase for TID=19
+Coordinator START PreCommitPhase for TID=20
+Coordinator PRECOMMIT TID=18 success=true
+Coordinator START CommitPhase for TID=18
+Coordinator PRECOMMIT TID=20 success=true
+Coordinator START CommitPhase for TID=20
+Coordinator PRECOMMIT TID=19 success=true
+Coordinator START CommitPhase for TID=19
+Server Commit START for TID=18
+ROLLBACK TID=18 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=18 COMMITTED with values: map[x:<nil>]
+Coordinator COMMITTED TID=18
+Server Commit START for TID=20
+ROLLBACK TID=20 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=20 COMMITTED with values: map[x:<nil>]
+Coordinator COMMITTED TID=20
+Server Commit START for TID=19
+ROLLBACK TID=19 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=19 COMMITTED with values: map[x:<nil>]
+Coordinator COMMITTED TID=19
+Coordinator START PreparePhase for TID=22
+Coordinator START PreparePhase for TID=21
+Server Prepare START for TID=22
+Server Prepare START for TID=21
+Server Prepare START for TID=21
+Server Prepare START for TID=21
+Coordinator START PreparePhase for TID=23
+TID=21 attempting 1 operations
+TID=21 trying Get on key=y
+TID=21 trying read on key=y
+TID=21 ACQUIRED read lock on y
+TID=21 PREPARED successfully
+Server Prepare START for TID=22
+Server Prepare START for TID=23
+Server Prepare START for TID=23
+TID=23 attempting 1 operations
+TID=23 trying Get on key=y
+TID=23 trying read on key=y
+TID=23 ACQUIRED read lock on y
+TID=23 PREPARED successfully
+Server Prepare START for TID=23
+Server Prepare START for TID=22
+TID=22 attempting 1 operations
+TID=22 trying Get on key=y
+TID=22 trying read on key=y
+TID=22 ACQUIRED read lock on y
+TID=22 PREPARED successfully
+Coordinator PREPARED TID=22 success=true
+Coordinator START PreCommitPhase for TID=22
+Coordinator PREPARED TID=21 success=true
+Coordinator START PreCommitPhase for TID=21
+Coordinator PREPARED TID=23 success=true
+Coordinator START PreCommitPhase for TID=23
+Coordinator PRECOMMIT TID=21 success=true
+Coordinator START CommitPhase for TID=21
+Coordinator PRECOMMIT TID=22 success=true
+Coordinator START CommitPhase for TID=22
+Server Commit START for TID=21
+ROLLBACK TID=21 releasing 1 locks
+Releasing lock on key=y (write=false)
+TID=21 COMMITTED with values: map[y:<nil>]
+Coordinator PRECOMMIT TID=23 success=true
+Coordinator START CommitPhase for TID=23
+Coordinator COMMITTED TID=21
+Server Commit START for TID=22
+ROLLBACK TID=22 releasing 1 locks
+Releasing lock on key=y (write=false)
+TID=22 COMMITTED with values: map[y:<nil>]
+Coordinator COMMITTED TID=22
+Server Commit START for TID=23
+ROLLBACK TID=23 releasing 1 locks
+Releasing lock on key=y (write=false)
+TID=23 COMMITTED with values: map[y:<nil>]
+Coordinator COMMITTED TID=23
+Coordinator START PreparePhase for TID=24
+Coordinator START PreparePhase for TID=26
+Coordinator START PreparePhase for TID=25
+Server Prepare START for TID=26
+Server Prepare START for TID=25
+Server Prepare START for TID=24
+TID=24 attempting 1 operations
+TID=24 trying Get on key=z
+Server Prepare START for TID=26
+TID=24 trying read on key=z
+TID=24 ACQUIRED read lock on z
+TID=24 PREPARED successfully
+Server Prepare START for TID=24
+Server Prepare START for TID=25
+Server Prepare START for TID=26
+TID=26 attempting 1 operations
+TID=26 trying Get on key=z
+TID=26 trying read on key=z
+TID=26 ACQUIRED read lock on z
+TID=26 PREPARED successfully
+Server Prepare START for TID=24
+Server Prepare START for TID=25
+TID=25 attempting 1 operations
+TID=25 trying Get on key=z
+TID=25 trying read on key=z
+TID=25 ACQUIRED read lock on z
+TID=25 PREPARED successfully
+Coordinator PREPARED TID=24 success=true
+Coordinator START PreCommitPhase for TID=24
+Coordinator PREPARED TID=25 success=true
+Coordinator PREPARED TID=26 success=true
+Coordinator START PreCommitPhase for TID=26
+Coordinator START PreCommitPhase for TID=25
+Coordinator PRECOMMIT TID=25 success=true
+Coordinator START CommitPhase for TID=25
+Coordinator PRECOMMIT TID=26 success=true
+Coordinator START CommitPhase for TID=26
+Coordinator PRECOMMIT TID=24 success=true
+Coordinator START CommitPhase for TID=24
+Server Commit START for TID=25
+ROLLBACK TID=25 releasing 1 locks
+Releasing lock on key=z (write=false)
+TID=25 COMMITTED with values: map[z:<nil>]
+Coordinator COMMITTED TID=25
+Server Commit START for TID=26
+ROLLBACK TID=26 releasing 1 locks
+Releasing lock on key=z (write=false)
+TID=26 COMMITTED with values: map[z:<nil>]
+Coordinator COMMITTED TID=26
+Server Commit START for TID=24
+ROLLBACK TID=24 releasing 1 locks
+Releasing lock on key=z (write=false)
+TID=24 COMMITTED with values: map[z:<nil>]
+Coordinator COMMITTED TID=24
+Coordinator START PreparePhase for TID=27
+Coordinator START PreparePhase for TID=28
+Coordinator START PreparePhase for TID=29
+Server Prepare START for TID=27
+Server Prepare START for TID=28
+Server Prepare START for TID=27
+Server Prepare START for TID=29
+Server Prepare START for TID=29
+TID=29 attempting 1 operations
+TID=29 trying Get on key=x
+TID=29 trying read on key=x
+TID=29 ACQUIRED read lock on x
+TID=29 PREPARED successfully
+Server Prepare START for TID=28
+TID=28 attempting 1 operations
+TID=28 trying Get on key=x
+TID=28 trying read on key=x
+TID=28 ACQUIRED read lock on x
+TID=28 PREPARED successfully
+Server Prepare START for TID=29
+Server Prepare START for TID=28
+Server Prepare START for TID=27
+TID=27 attempting 1 operations
+TID=27 trying Get on key=x
+TID=27 trying read on key=x
+TID=27 ACQUIRED read lock on x
+TID=27 PREPARED successfully
+Coordinator PREPARED TID=27 success=true
+Coordinator PREPARED TID=29 success=true
+Coordinator PREPARED TID=28 success=true
+Coordinator START PreCommitPhase for TID=28
+Coordinator START PreCommitPhase for TID=29
+Coordinator START PreCommitPhase for TID=27
+Coordinator PRECOMMIT TID=29 success=true
+Coordinator START CommitPhase for TID=29
+Coordinator PRECOMMIT TID=27 success=true
+Coordinator START CommitPhase for TID=27
+Coordinator PRECOMMIT TID=28 success=true
+Coordinator START CommitPhase for TID=28
+Server Commit START for TID=29
+ROLLBACK TID=29 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=29 COMMITTED with values: map[x:<nil>]
+Coordinator COMMITTED TID=29
+Server Commit START for TID=27
+ROLLBACK TID=27 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=27 COMMITTED with values: map[x:<nil>]
+Coordinator COMMITTED TID=27
+Server Commit START for TID=28
+ROLLBACK TID=28 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=28 COMMITTED with values: map[x:<nil>]
+Coordinator COMMITTED TID=28
+  ... Passed --   0.2  3  162   14450    0
+--- PASS: TestConcurrentReadSameKeys (0.21s)
+PASS
+ok  	cs351/3pc	1.244s
+=== RUN   TestConcurrentWriteSameKeys
+TestConcurrentWriteSameKeys: Concurrent transactions that write to the same keys should have at least one commit ...
+Coordinator START PreparePhase for TID=0
+Coordinator START PreparePhase for TID=1
+Coordinator START PreparePhase for TID=2
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=x
+TID=0 trying write on key=x
+TID=0 ACQUIRED write lock on x
+TID=0 PREPARED successfully
+Server Prepare START for TID=2
+Server Prepare START for TID=2
+TID=2 attempting 1[...(truncated)...] for TID=26
+Server Prepare START for TID=27
+TID=27 attempting 1 operations
+TID=27 trying Set on key=z
+TID=27 trying write on key=z
+TID=27 ACQUIRED write lock on z
+TID=27 PREPARED successfully
+Server Prepare START for TID=25
+TID=25 attempting 1 operations
+TID=25 trying Set on key=y
+TID=25 trying write on key=y
+TID=25 ACQUIRED write lock on y
+TID=25 PREPARED successfully
+Server Prepare START for TID=27
+TID=27 attempting 1 operations
+TID=27 trying Set on key=x
+TID=27 trying write on key=x
+TID=27 ACQUIRED write lock on x
+Server Prepare START for TID=26
+TID=26 attempting 1 operations
+TID=26 trying Set on key=z
+TID=26 trying write on key=z
+Server Prepare START for TID=27
+TID=27 attempting 1 operations
+TID=27 trying Set on key=y
+TID=27 trying write on key=y
+TID=27 FAILED to acquire write lock on y
+ROLLBACK TID=27 releasing 0 locks
+TID=26 FAILED to acquire write lock on z
+ROLLBACK TID=26 releasing 0 locks
+TID=27 PREPARED successfully
+Server Prepare START for TID=25
+TID=25 attempting 1 operations
+Server Prepare START for TID=25
+TID=25 attempting 1 operations
+TID=25 trying Set on key=z
+TID=25 trying write on key=z
+TID=25 FAILED to acquire write lock on z
+ROLLBACK TID=25 releasing 0 locks
+TID=25 trying Set on key=x
+TID=25 trying write on key=x
+TID=25 FAILED to acquire write lock on x
+ROLLBACK TID=25 releasing 0 locks
+Server Prepare START for TID=26
+TID=26 attempting 1 operations
+TID=26 trying Set on key=x
+TID=26 trying write on key=x
+TID=26 FAILED to acquire write lock on x
+ROLLBACK TID=26 releasing 0 locks
+Server Prepare START for TID=26
+TID=26 attempting 1 operations
+TID=26 trying Set on key=y
+TID=26 trying write on key=y
+TID=26 FAILED to acquire write lock on y
+ROLLBACK TID=26 releasing 0 locks
+Coordinator PREPARED TID=26 success=false
+Coordinator ABORTING TID=26
+Coordinator PREPARED TID=25 success=false
+Coordinator ABORTING TID=25
+Coordinator PREPARED TID=27 success=false
+Coordinator ABORTING TID=27
+ROLLBACK TID=26 releasing 0 locks
+ROLLBACK TID=26 releasing 0 locks
+ROLLBACK TID=25 releasing 0 locks
+ROLLBACK TID=27 releasing 1 locks
+Releasing lock on key=z (write=true)
+ROLLBACK TID=27 releasing 1 locks
+Releasing lock on key=x (write=true)
+ROLLBACK TID=27 releasing 0 locks
+ROLLBACK TID=26 releasing 0 locks
+ROLLBACK TID=25 releasing 0 locks
+ROLLBACK TID=25 releasing 1 locks
+Releasing lock on key=y (write=true)
+Coordinator START PreparePhase for TID=28
+Server Prepare START for TID=28
+TID=28 attempting 1 operations
+TID=28 trying Get on key=x
+TID=28 trying read on key=x
+TID=28 ACQUIRED read lock on x
+Server Prepare START for TID=28
+Server Prepare START for TID=28
+TID=28 attempting 1 operations
+TID=28 trying Get on key=z
+TID=28 trying read on key=z
+TID=28 ACQUIRED read lock on z
+TID=28 PREPARED successfully
+TID=28 attempting 1 operations
+TID=28 PREPARED successfully
+TID=28 trying Get on key=y
+TID=28 trying read on key=y
+TID=28 ACQUIRED read lock on y
+TID=28 PREPARED successfully
+Coordinator PREPARED TID=28 success=true
+Coordinator START PreCommitPhase for TID=28
+Coordinator PRECOMMIT TID=28 success=true
+Coordinator START CommitPhase for TID=28
+Server Commit START for TID=28
+ROLLBACK TID=28 releasing 1 locks
+Releasing lock on key=z (write=false)
+TID=28 COMMITTED with values: map[z:2]
+Server Commit START for TID=28
+ROLLBACK TID=28 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=28 COMMITTED with values: map[x:2]
+Server Commit START for TID=28
+ROLLBACK TID=28 releasing 1 locks
+Releasing lock on key=y (write=false)
+TID=28 COMMITTED with values: map[y:2]
+Coordinator COMMITTED TID=28
+Coordinator START PreparePhase for TID=29
+Coordinator START PreparePhase for TID=31
+Coordinator START PreparePhase for TID=30
+Server Prepare START for TID=31
+TID=31 attempting 1 operations
+TID=31 trying Set on key=x
+TID=31 trying write on key=x
+TID=31 ACQUIRED write lock on x
+TID=31 PREPARED successfully
+Server Prepare START for TID=30
+TID=30 attempting 1 operations
+TID=30 trying Set on key=x
+Server Prepare START for TID=31
+TID=31 attempting 1 operations
+TID=31 trying Set on key=z
+TID=31 trying write on key=z
+TID=31 ACQUIRED write lock on z
+TID=31 PREPARED successfully
+Server Prepare START for TID=29
+TID=29 attempting 1 operations
+TID=29 trying Set on key=z
+TID=29 trying write on key=z
+TID=29 FAILED to acquire write lock on z
+ROLLBACK TID=29 releasing 0 locks
+Server Prepare START for TID=30
+TID=30 attempting 1 operations
+TID=30 trying Set on key=z
+TID=30 trying write on key=z
+TID=30 FAILED to acquire write lock on z
+ROLLBACK TID=30 releasing 0 locks
+TID=30 trying write on key=x
+TID=30 FAILED to acquire write lock on x
+ROLLBACK TID=30 releasing 0 locks
+Server Prepare START for TID=31
+TID=31 attempting 1 operations
+TID=31 trying Set on key=y
+TID=31 trying write on key=y
+TID=31 ACQUIRED write lock on y
+TID=31 PREPARED successfully
+Server Prepare START for TID=29
+TID=29 attempting 1 operations
+TID=29 trying Set on key=y
+TID=29 trying write on key=y
+TID=29 FAILED to acquire write lock on y
+ROLLBACK TID=29 releasing 0 locks
+Server Prepare START for TID=29
+TID=29 attempting 1 operations
+TID=29 trying Set on key=x
+TID=29 trying write on key=x
+TID=29 FAILED to acquire write lock on x
+ROLLBACK TID=29 releasing 0 locks
+Server Prepare START for TID=30
+TID=30 attempting 1 operations
+TID=30 trying Set on key=y
+TID=30 trying write on key=y
+TID=30 FAILED to acquire write lock on y
+ROLLBACK TID=30 releasing 0 locks
+Coordinator PREPARED TID=30 success=false
+Coordinator ABORTING TID=30
+Coordinator PREPARED TID=29 success=false
+Coordinator ABORTING TID=29
+Coordinator PREPARED TID=31 success=true
+Coordinator START PreCommitPhase for TID=31
+ROLLBACK TID=30 releasing 0 locks
+ROLLBACK TID=30 releasing 0 locks
+ROLLBACK TID=30 releasing 0 locks
+ROLLBACK TID=29 releasing 0 locks
+ROLLBACK TID=29 releasing 0 locks
+ROLLBACK TID=29 releasing 0 locks
+Coordinator PRECOMMIT TID=31 success=true
+Coordinator START CommitPhase for TID=31
+Server Commit START for TID=31
+ROLLBACK TID=31 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=31 COMMITTED with values: map[]
+Server Commit START for TID=31
+ROLLBACK TID=31 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=31 COMMITTED with values: map[]
+Server Commit START for TID=31
+ROLLBACK TID=31 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=31 COMMITTED with values: map[]
+Coordinator COMMITTED TID=31
+Coordinator START PreparePhase for TID=32
+Server Prepare START for TID=32
+TID=32 attempting 1 operations
+TID=32 trying Get on key=x
+Server Prepare START for TID=32
+TID=32 attempting 1 operations
+TID=32 trying Get on key=z
+TID=32 trying read on key=z
+TID=32 ACQUIRED read lock on z
+TID=32 PREPARED successfully
+Server Prepare START for TID=32
+TID=32 trying read on key=x
+TID=32 attempting 1 operations
+TID=32 ACQUIRED read lock on x
+TID=32 trying Get on key=y
+TID=32 PREPARED successfully
+TID=32 trying read on key=y
+TID=32 ACQUIRED read lock on y
+TID=32 PREPARED successfully
+Coordinator PREPARED TID=32 success=true
+Coordinator START PreCommitPhase for TID=32
+Coordinator PRECOMMIT TID=32 success=true
+Coordinator START CommitPhase for TID=32
+Server Commit START for TID=32
+ROLLBACK TID=32 releasing 1 locks
+Releasing lock on key=z (write=false)
+TID=32 COMMITTED with values: map[z:31]
+Server Commit START for TID=32
+ROLLBACK TID=32 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=32 COMMITTED with values: map[x:31]
+Server Commit START for TID=32
+ROLLBACK TID=32 releasing 1 locks
+Releasing lock on key=y (write=false)
+TID=32 COMMITTED with values: map[y:31]
+Coordinator COMMITTED TID=32
+Coordinator START PreparePhase for TID=34
+Coordinator START PreparePhase for TID=35
+Coordinator START PreparePhase for TID=33
+Server Prepare START for TID=34
+TID=34 attempting 1 operations
+TID=34 trying Set on key=x
+TID=34 trying write on key=x
+TID=34 ACQUIRED write lock on x
+TID=34 PREPARED successfully
+Server Prepare START for TID=35
+TID=35 attempting 1 operations
+TID=35 trying Set on key=y
+TID=35 trying write on key=y
+TID=35 ACQUIRED write lock on y
+TID=35 PREPARED successfully
+Server Prepare START for TID=34
+TID=34 attempting 1 operations
+TID=34 trying Set on key=z
+TID=34 trying write on key=z
+TID=34 ACQUIRED write lock on z
+TID=34 PREPARED successfully
+Server Prepare START for TID=35
+TID=35 attempting 1 operations
+TID=35 trying Set on key=x
+TID=35 trying write on key=x
+TID=35 FAILED to acquire write lock on x
+ROLLBACK TID=35 releasing 0 locks
+Server Prepare START for TID=34
+TID=34 attempting 1 operations
+TID=34 trying Set on key=y
+TID=34 trying write on key=y
+TID=34 FAILED to acquire write lock on y
+ROLLBACK TID=34 releasing 0 locks
+Server Prepare START for TID=33
+TID=33 attempting 1 operations
+TID=33 trying Set on key=x
+TID=33 trying write on key=x
+TID=33 FAILED to acquire write lock on x
+ROLLBACK TID=33 releasing 0 locks
+Server Prepare START for TID=33
+TID=33 attempting 1 operations
+Server Prepare START for TID=33
+TID=33 attempting 1 operations
+TID=33 trying Set on key=z
+TID=33 trying write on key=z
+TID=33 FAILED to acquire write lock on z
+ROLLBACK TID=33 releasing 0 locks
+TID=33 trying Set on key=y
+TID=33 trying write on key=y
+TID=33 FAILED to acquire write lock on y
+ROLLBACK TID=33 releasing 0 locks
+Server Prepare START for TID=35
+TID=35 attempting 1 operations
+TID=35 trying Set on key=z
+TID=35 trying write on key=z
+TID=35 FAILED to acquire write lock on z
+ROLLBACK TID=35 releasing 0 locks
+Coordinator PREPARED TID=34 success=false
+Coordinator PREPARED TID=35 success=false
+Coordinator ABORTING TID=35
+Coordinator PREPARED TID=33 success=false
+Coordinator ABORTING TID=33
+Coordinator ABORTING TID=34
+ROLLBACK TID=35 releasing 0 locks
+ROLLBACK TID=35 releasing 0 locks
+ROLLBACK TID=34 releasing 1 locks
+ROLLBACK TID=35 releasing 1 locks
+Releasing lock on key=y (write=true)
+ROLLBACK TID=34 releasing 1 locks
+Releasing lock on key=x (write=true)
+Releasing lock on key=z (write=true)
+ROLLBACK TID=33 releasing 0 locks
+ROLLBACK TID=33 releasing 0 locks
+ROLLBACK TID=33 releasing 0 locks
+ROLLBACK TID=34 releasing 0 locks
+Coordinator START PreparePhase for TID=36
+Server Prepare START for TID=36
+TID=36 attempting 1 operations
+TID=36 trying Get on key=y
+TID=36 trying read on key=y
+TID=36 ACQUIRED read lock on y
+TID=36 PREPARED successfully
+Server Prepare START for TID=36
+TID=36 attempting 1 operations
+TID=36 trying Get on key=x
+TID=36 trying read on key=x
+TID=36 ACQUIRED read lock on x
+TID=36 PREPARED successfully
+Server Prepare START for TID=36
+TID=36 attempting 1 operations
+TID=36 trying Get on key=z
+TID=36 trying read on key=z
+TID=36 ACQUIRED read lock on z
+TID=36 PREPARED successfully
+Coordinator PREPARED TID=36 success=true
+Coordinator START PreCommitPhase for TID=36
+Coordinator PRECOMMIT TID=36 success=true
+Coordinator START CommitPhase for TID=36
+Server Commit START for TID=36
+ROLLBACK TID=36 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=36 COMMITTED with values: map[x:31]
+Server Commit START for TID=36
+ROLLBACK TID=36 releasing 1 locks
+Releasing lock on key=y (write=false)
+TID=36 COMMITTED with values: map[y:31]
+Server Commit START for TID=36
+ROLLBACK TID=36 releasing 1 locks
+Releasing lock on key=z (write=false)
+TID=36 COMMITTED with values: map[z:31]
+Coordinator COMMITTED TID=36
+Coordinator START PreparePhase for TID=37
+Coordinator START PreparePhase for TID=39
+Coordinator START PreparePhase for TID=38
+Server Prepare START for TID=37
+TID=37 attempting 1 operations
+TID=37 trying Set on key=x
+TID=37 trying write on key=x
+TID=37 ACQUIRED write lock on x
+TID=37 PREPARED successfully
+Server Prepare START for TID=38
+Server Prepare START for TID=37
+TID=37 attempting 1 operations
+TID=37 trying Set on key=z
+Server Prepare START for TID=39
+TID=39 attempting 1 operations
+TID=39 trying Set on key=x
+TID=39 trying write on key=x
+TID=39 FAILED to acquire write lock on x
+ROLLBACK TID=39 releasing 0 locks
+TID=38 attempting 1 operations
+TID=38 trying Set on key=y
+TID=37 trying write on key=z
+TID=37 ACQUIRED write lock on z
+TID=37 PREPARED successfully
+Server Prepare START for TID=38
+TID=38 attempting 1 operations
+TID=38 trying write on key=y
+TID=38 ACQUIRED write lock on y
+TID=38 PREPARED successfully
+Server Prepare START for TID=38
+TID=38 attempting 1 operations
+Server Prepare START for TID=39
+TID=38 trying Set on key=x
+TID=39 attempting 1 operations
+TID=38 trying write on key=x
+TID=39 trying Set on key=y
+TID=39 trying write on key=y
+TID=39 FAILED to acquire write lock on y
+ROLLBACK TID=39 releasing 0 locks
+TID=38 trying Set on key=z
+Server Prepare START for TID=37
+TID=38 trying write on key=z
+TID=38 FAILED to acquire write lock on x
+ROLLBACK TID=38 releasing 0 locks
+TID=37 attempting 1 operations
+TID=38 FAILED to acquire write lock on z
+TID=37 trying Set on key=y
+ROLLBACK TID=38 releasing 0 locks
+TID=37 trying write on key=y
+TID=37 FAILED to acquire write lock on y
+ROLLBACK TID=37 releasing 0 locks
+Server Prepare START for TID=39
+TID=39 attempting 1 operations
+TID=39 trying Set on key=z
+TID=39 trying write on key=z
+TID=39 FAILED to acquire write lock on z
+ROLLBACK TID=39 releasing 0 locks
+Coordinator PREPARED TID=39 success=false
+Coordinator ABORTING TID=39
+Coordinator PREPARED TID=38 success=false
+Coordinator ABORTING TID=38
+Coordinator PREPARED TID=37 success=false
+Coordinator ABORTING TID=37
+ROLLBACK TID=39 releasing 0 locks
+ROLLBACK TID=37 releasing 0 locks
+ROLLBACK TID=39 releasing 0 locks
+ROLLBACK TID=38 releasing 0 locks
+ROLLBACK TID=37 releasing 1 locks
+Releasing lock on key=z (write=true)
+ROLLBACK TID=39 releasing 0 locks
+ROLLBACK TID=37 releasing 1 locks
+Releasing lock on key=x (write=true)
+ROLLBACK TID=38 releasing 1 locks
+Releasing lock on key=y (write=true)
+ROLLBACK TID=38 releasing 0 locks
+Coordinator START PreparePhase for TID=40
+Server Prepare START for TID=40
+TID=40 attempting 1 operations
+Server Prepare START for TID=40
+TID=40 attempting 1 operations
+TID=40 trying Get on key=z
+Server Prepare START for TID=40
+TID=40 attempting 1 operations
+TID=40 trying Get on key=y
+TID=40 trying read on key=y
+TID=40 ACQUIRED read lock on y
+TID=40 PREPARED successfully
+TID=40 trying Get on key=x
+TID=40 trying read on key=x
+TID=40 ACQUIRED read lock on x
+TID=40 PREPARED successfully
+TID=40 trying read on key=z
+TID=40 ACQUIRED read lock on z
+TID=40 PREPARED successfully
+Coordinator PREPARED TID=40 success=true
+Coordinator START PreCommitPhase for TID=40
+Coordinator PRECOMMIT TID=40 success=true
+Coordinator START CommitPhase for TID=40
+Server Commit START for TID=40
+ROLLBACK TID=40 releasing 1 locks
+Releasing lock on key=y (write=false)
+TID=40 COMMITTED with values: map[y:31]
+Server Commit START for TID=40
+ROLLBACK TID=40 releasing 1 locks
+Releasing lock on key=x (write=false)
+TID=40 COMMITTED with values: map[x:31]
+Server Commit START for TID=40
+ROLLBACK TID=40 releasing 1 locks
+Releasing lock on key=z (write=false)
+TID=40 COMMITTED with values: map[z:31]
+Coordinator COMMITTED TID=40
+  ... Passed --   0.4  3  294   23343    0
+--- PASS: TestSerializability (0.43s)
+PASS
+ok  	cs351/3pc	1.470s
+=== RUN   TestDisconnectPreCommit
+TestDisconnectPreCommit: If a server disconnects before PreCommit, we abort ...
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=y
+TID=0 trying Set on key=x
+TID=0 trying write on key=y
+TID=0 ACQUIRED write lock on y
+TID=0 PREPARED successfully
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=z
+TID=0 trying write on key=z
+TID=0 ACQUIRED write lock on z
+TID=0 PREPARED successfully
+TID=0 trying write on key=x
+TID=0 ACQUIRED write lock on x
+TID=0 PREPARED successfully
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Coordinator PRECOMMIT TID=0 success=false
+Coordinator ABORTING TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=z (write=true)
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=y (write=true)
+  ... Passed --   0.0  3   17    1227    0
+--- PASS: TestDisconnectPreCommit (0.03s)
+PASS
+Coordinator PRECOMMIT TID=0 success=false
+Coordinator ABORTING TID=0
+ok  	cs351/3pc	1.069s
+=== RUN   TestDisconnectCommit
+TestDisconnectCommit: If a server disconnects before Commit, we block until it returns ...
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=z
+TID=0 trying write on key=z
+TID=0 ACQUIRED write lock on z
+TID=0 PREPARED successfully
+TID=0 attempting 1 operations
+TID=0 trying Set on key=x
+TID=0 trying write on key=x
+TID=0 ACQUIRED write lock on x
+TID=0 PREPARED successfully
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=y
+TID=0 trying write on key=y
+TID=0 ACQUIRED write lock on y
+TID=0 PREPARED successfully
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Coordinator PRECOMMIT TID=0 success=true
+Coordinator START CommitPhase for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=0 COMMITTED with values: map[]
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=0 COMMITTED with values: map[]
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=0 COMMITTED with values: map[]
+Coordinator COMMITTED TID=0
+Coordinator ABORTING TID=0
+  ... Passed --   0.1  3   17    1455    0
+--- PASS: TestDisconnectCommit (0.11s)
+PASS
+ok  	cs351/3pc	1.153s
+=== RUN   TestRestartPreCommit
+TestRestartPreCommit: If the coordinator restarts before PreCommit, we commit ...
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=z
+TID=0 trying write on key=z
+TID=0 ACQUIRED write lock on z
+TID=0 PREPARED successfully
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=x
+TID=0 trying write on key=x
+TID=0 ACQUIRED write lock on x
+TID=0 PREPARED successfully
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=y
+TID=0 trying write on key=y
+TID=0 ACQUIRED write lock on y
+TID=0 PREPARED successfully
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Coordinator PRECOMMIT TID=0 success=true
+Coordinator START CommitPhase for TID=0
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=0 COMMITTED with values: map[]
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=0 COMMITTED with values: map[]
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=0 COMMITTED with values: map[]
+Coordinator COMMITTED TID=0
+  ... Passed --   0.0  3   22    2041    0
+--- PASS: TestRestartPreCommit (0.03s)
+PASS
+Coordinator PRECOMMIT TID=0 success=false
+Coordinator ABORTING TID=0
+ok  	cs351/3pc	1.070s
+=== RUN   TestRestartCommit
+TestRestartCommit: If the coordinator restarts before Commit, we commit ...
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=y
+TID=0 trying write on key=y
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=z
+TID=0 trying write on key=z
+TID=0 ACQUIRED write lock on z
+TID=0 PREPARED successfully
+TID=0 ACQUIRED write lock on y
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=x
+TID=0 trying write on key=x
+TID=0 ACQUIRED write lock on x
+TID=0 PREPARED successfully
+TID=0 PREPARED successfully
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Coordinator PRECOMMIT TID=0 success=true
+Coordinator START CommitPhase for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Coordinator START CommitPhase for TID=0
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=0 COMMITTED with values: map[]
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=0 COMMITTED with values: map[]
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=0 COMMITTED with values: map[]
+Coordinator COMMITTED TID=0
+Coordinator START PreparePhase for TID=1
+Server Prepare START for TID=1
+TID=1 attempting 1 operations
+TID=1 trying Set on key=x
+TID=1 trying write on key=x
+TID=1 ACQUIRED write lock on x
+TID=1 PREPARED successfully
+Server Prepare START for TID=1
+TID=1 attempting 1 operations
+TID=1 trying Set on key=y
+TID=1 trying write on key=y
+Server Prepare START for TID=1
+TID=1 attempting 1 operations
+TID=1 ACQUIRED write lock on y
+TID=1 trying Set on key=z
+TID=1 trying write on key=z
+TID=1 ACQUIRED write lock on z
+TID=1 PREPARED successfully
+TID=1 PREPARED successfully
+Coordinator PREPARED TID=1 success=true
+Coordinator START PreCommitPhase for TID=1
+Coordinator PRECOMMIT TID=1 success=true
+Coordinator START CommitPhase for TID=1
+Coordinator START CommitPhase for TID=1
+Server Commit START for TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=1 COMMITTED with values: map[]
+Server Commit START for TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=1 COMMITTED with values: map[]
+Server Commit START for TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=1 COMMITTED with values: map[]
+Coordinator COMMITTED TID=1
+Coordinator START PreparePhase for TID=2
+Server Prepare START for TID=2
+Server Prepare START for TID=2
+TID=2 attempting 1 operations
+Server Prepare START for TID=2
+TID=2 trying Set on key=y
+TID=2 attempting 1 operations
+TID=2 trying write on key=y
+TID=2 ACQUIRED write lock on y
+TID=2 PREPARED successfully
+TID=2 trying Set on key=z
+TID=2 attempting 1 operations
+TID=2 trying Set on key=x
+TID=2 trying write on key=x
+TID=2 ACQUIRED write lock on x
+TID=2 PREPARED successfully
+TID=2 trying write on key=z
+TID=2 ACQUIRED write lock on z
+TID=2 PREPARED successfully
+Coordinator PREPARED TID=2 success=true
+Coordinator START PreCommitPhase for TID=2
+Coordinator PRECOMMIT TID=2 success=true
+Coordinator START CommitPhase for TID=2
+Coordinator START CommitPhase for TID=2
+Server Commit START for TID=2
+ROLLBACK TID=2 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=2 COMMITTED with values: map[]
+Server Commit START for TID=2
+ROLLBACK TID=2 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=2 COMMITTED with values: map[]
+Server Commit START for TID=2
+ROLLBACK TID=2 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=2 COMMITTED with values: map[]
+Coordinator COMMITTED TID=2
+Coordinator START PreparePhase for TID=3
+Server Prepare START for TID=3
+TID=3 attempting 1 operations
+TID=3 trying Set on key=z
+TID=3 trying write on key=z
+TID=3 ACQUIRED write lock on z
+TID=3 PREPARED successfully
+Server Prepare START for TID=3
+TID=3 attempting 1 operations
+TID=3 trying Set on key=y
+Server Prepare START for TID=3
+TID=3 attempting 1 operations
+TID=3 trying write on key=y
+TID=3 ACQUIRED write lock on y
+TID=3 PREPARED successfully
+TID=3 trying Set on key=x
+TID=3 trying write on key=x
+TID=3 ACQUIRED write lock on x
+TID=3 PREPARED successfully
+Coordinator PREPARED TID=3 success=true
+Coordinator START PreCommitPhase for TID=3
+Coordinator PRECOMMIT TID=3 success=true
+Coordinator START CommitPhase for TID=3
+Coordinator START CommitPhase for TID=3
+Server Commit START for TID=3
+ROLLBACK TID=3 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=3 COMMITTED with values: map[]
+Server Commit START for TID=3
+ROLLBACK TID=3 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=3 COMMITTED with values: map[]
+Server Commit START for TID=3
+ROLLBACK TID=3 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=3 COMMITTED with values: map[]
+Coordinator COMMITTED TID=3
+Coordinator START PreparePhase for TID=4
+Server Prepare START for TID=4
+TID=4 attempting 1 operations
+Server Prepare START for TID=4
+Server Prepare START for TID=4
+TID=4 attempting 1 operations
+TID=4 trying Set on key=y
+TID=4 trying write on key=y
+TID=4 ACQUIRED write lock on y
+TID=4 PREPARED successfully
+TID=4 attempting 1 operations
+TID=4 trying Set on key=z
+TID=4 trying Set on key=x
+TID=4 trying write on key=x
+TID=4 ACQUIRED write lock on x
+TID=4 PREPARED successfully
+TID=4 trying write on key=z
+TID=4 ACQUIRED write lock on z
+TID=4 PREPARED successfully
+Coordinator PREPARED TID=4 success=true
+Coordinator START PreCommitPhase for TID=4
+Coordinator PRECOMMIT TID=4 success=true
+Coordinator START CommitPhase for TID=4
+Coordinator START CommitPhase for TID=4
+Server Commit START for TID=4
+ROLLBACK TID=4 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=4 COMMITTED with values: map[]
+Server Commit START for TID=4
+ROLLBACK TID=4 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=4 COMMITTED with values: map[]
+Server Commit START for TID=4
+ROLLBACK TID=4 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=4 COMMITTED with values: map[]
+Coordinator COMMITTED TID=4
+Coordinator START PreparePhase for TID=5
+Server Prepare START for TID=5
+TID=5 attempting 1 operations
+TID=5 trying Set on key=z
+TID=5 trying write on key=z
+Server Prepare START for TID=5
+TID=5 attempting 1 operations
+TID=5 trying Set on key=y
+TID=5 trying write on key=y
+TID=5 ACQUIRED write lock on y
+TID=5 PREPARED successfully
+TID=5 ACQUIRED write lock on z
+TID=5 PREPARED successfully
+Server Prepare START for TID=5
+TID=5 attempting 1 operations
+TID=5 trying Set on key=x
+TID=5 trying write on key=x
+TID=5 ACQUIRED write lock on x
+TID=5 PREPARED successfully
+Coordinator PREPARED TID=5 success=true
+Coordinator START PreCommitPhase for TID=5
+Coordinator PRECOMMIT TID=5 success=true
+Coordinator START CommitPhase for TID=5
+Coordinator START CommitPhase for TID=5
+Server Commit START for TID=5
+ROLLBACK TID=5 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=5 COMMITTED with values: map[]
+Server Commit START for TID=5
+ROLLBACK TID=5 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=5 COMMITTED with values: map[]
+Server Commit START for TID=5
+ROLLBACK TID=5 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=5 COMMITTED with values: map[]
+Coordinator COMMITTED TID=5
+Coordinator START PreparePhase for TID=6
+Server Prepare START for TID=6
+TID=6 attempting 1 operations
+TID=6 trying Set on key=x
+TID=6 trying write on key=x
+TID=6 ACQUIRED write lock on x
+TID=6 PREPARED successfully
+Server Prepare START for TID=6
+TID=6 attempting 1 operations
+Server Prepare START for TID=6
+TID=6 trying Set on key=z
+TID=6 trying write on key=z
+TID=6 ACQUIRED write lock on z
+TID=6 PREPARED successfully
+TID=6 attempting 1 operations
+TID=6 trying Set on key=y
+TID=6 trying write on key=y
+TID=6 ACQUIRED write lock on y
+TID=6 PREPARED successfully
+Coordinator PREPARED TID=6 success=true
+Coordinator START PreCommitPhase for TID=6
+Coordinator PRECOMMIT TID=6 success=true
+Coordinator START CommitPhase for TID=6
+Coordinator START CommitPhase for TID=6
+Server Commit START for TID=6
+ROLLBACK TID=6 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=6 COMMITTED with values: map[]
+Server Commit START for TID=6
+ROLLBACK TID=6 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=6 COMMITTED with values: map[]
+Server Commit START for TID=6
+ROLLBACK TID=6 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=6 COMMITTED with values: map[]
+Coordinator COMMITTED TID=6
+Coordinator COMMITTED TID=2
+Coordinator START PreparePhase for TID=7
+Server Prepare START for TID=7
+TID=7 attempting 1 operations
+Server Prepare START for TID=7
+TID=7 attempting 1 operations
+TID=7 trying Set on key=z
+Server Prepare START for TID=7
+TID=7 attempting 1 operations
+TID=7 trying Set on key=y
+TID=7 trying write on key=y
+TID=7 ACQUIRED write lock on y
+TID=7 PREPARED successfully
+TID=7 trying write on key=z
+TID=7 ACQUIRED write lock on z
+TID=7 trying Set on key=x
+TID=7 PREPARED successfully
+TID=7 trying write on key=x
+TID=7 ACQUIRED write lock on x
+TID=7 PREPARED successfully
+Coordinator COMMITTED TID=1
+Coordinator PREPARED TID=7 success=true
+Coordinator START PreCommitPhase for TID=7
+Coordinator PRECOMMIT TID=7 success=true
+Coordinator START CommitPhase for TID=7
+Coordinator START CommitPhase for TID=7
+Server Commit START for TID=7
+ROLLBACK TID=7 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=7 COMMITTED with values: map[]
+Server Commit START for TID=7
+ROLLBACK TID=7 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=7 COMMITTED with values: map[]
+Server Commit START for TID=7
+ROLLBACK TID=7 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=7 COMMITTED with values: map[]
+Coordinator COMMITTED TID=7
+Coordinator START PreparePhase for TID=8
+Server Prepare START for TID=8
+TID=8 attempting 1 operations
+TID=8 trying Set on key=z
+TID=8 trying write on key=z
+TID=8 ACQUIRED write lock on z
+Server Prepare START for TID=8
+Server Prepare START for TID=8
+TID=8 attempting 1 operations
+TID=8 PREPARED successfully
+TID=8 trying Set on key=x
+TID=8 attempting 1 operations
+TID=8 trying write on key=x
+TID=8 ACQUIRED write lock on x
+TID=8 PREPARED successfully
+TID=8 trying Set on key=y
+TID=8 trying write on key=y
+TID=8 ACQUIRED write lock on y
+TID=8 PREPARED successfully
+Coordinator PREPARED TID=8 success=true
+Coordinator START PreCommitPhase for TID=8
+Coordinator PRECOMMIT TID=8 success=true
+Coordinator START CommitPhase for TID=8
+Coordinator START CommitPhase for TID=8
+Server Commit START for TID=8
+ROLLBACK TID=8 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=8 COMMITTED with values: map[]
+Server Commit START for TID=8
+ROLLBACK TID=8 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=8 COMMITTED with values: map[]
+Server Commit START for TID=8
+ROLLBACK TID=8 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=8 COMMITTED with values: map[]
+Coordinator COMMITTED TID=8
+Coordinator START PreparePhase for TID=9
+Server Prepare START for TID=9
+Server Prepare START for TID=9
+Server Prepare START for TID=9
+TID=9 attempting 1 operations
+TID=9 trying Set on key=z
+TID=9 trying write on key=z
+TID=9 ACQUIRED write lock on z
+TID=9 PREPARED successfully
+TID=9 attempting 1 operations
+TID=9 attempting 1 operations
+TID=9 trying Set on key=x
+TID=9 trying write on key=x
+TID=9 ACQUIRED write lock on x
+TID=9 PREPARED successfully
+TID=9 trying Set on key=y
+TID=9 trying write on key=y
+TID=9 ACQUIRED write lock on y
+TID=9 PREPARED successfully
+Coordinator PREPARED TID=9 success=true
+Coordinator START PreCommitPhase for TID=9
+Coordinator PRECOMMIT TID=9 success=true
+Coordinator START CommitPhase for TID=9
+Coordinator START CommitPhase for TID=9
+Server Commit START for TID=9
+ROLLBACK TID=9 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=9 COMMITTED with values: map[]
+Server Commit START for TID=9
+ROLLBACK TID=9 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=9 COMMITTED with values: map[]
+Server Commit START for TID=9
+ROLLBACK TID=9 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=9 COMMITTED with values: map[]
+Coordinator COMMITTED TID=9
+  ... Passed --   0.2  3  147   12693    0
+--- PASS: TestRestartCommit (0.21s)
+PASS
+Coordinator COMMITTED TID=0
+Coordinator ABORTING TID=0
+Coordinator COMMITTED TID=6
+Coordinator COMMITTED TID=5
+Coordinator COMMITTED TID=4
+Coordinator COMMITTED TID=8
+Coordinator COMMITTED TID=9
+Coordinator COMMITTED TID=7
+Coordinator COMMITTED TID=3
+ok  	cs351/3pc	1.245s
+=== RUN   TestRestartMidPreCommit
+TestRestartPreCommit: If the coordinator restarts in the middle of PreCommit, we commit ...
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=y
+TID=0 trying write on key=y
+TID=0 ACQUIRED write lock on y
+TID=0 PREPARED successfully
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=x
+TID=0 trying write on key=x
+TID=0 ACQUIRED write lock on x
+TID=0 PREPARED successfully
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=z
+TID=0 trying write on key=z
+TID=0 ACQUIRED write lock on z
+TID=0 PREPARED successfully
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Coordinator START PreparePhase for TID=0
+Coordinator PREPARED TID=0 success=true
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Coordinator PRECOMMIT TID=0 success=true
+Coordinator START CommitPhase for TID=0
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=0 COMMITTED with values: map[]
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=0 COMMITTED with values: map[]
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=0 COMMITTED with values: map[]
+Coordinator COMMITTED TID=0
+Coordinator START PreparePhase for TID=1
+Server Prepare START for TID=1
+TID=1 attempting 1 operations
+TID=1 trying Set on key=x
+TID=1 trying write on key=x
+TID=1 ACQUIRED write lock on x
+TID=1 PREPARED successfully
+Server Prepare START for TID=1
+Server Prepare START for TID=1
+TID=1 attempting 1 operations
+TID=1 trying Set on key=z
+TID=1 trying write on key=z
+TID=1 ACQUIRED write lock on z
+TID=1 PREPARED successfully
+TID=1 attempting 1 operations
+TID=1 trying Set on key=y
+TID=1 trying write on key=y
+TID=1 ACQUIRED write lock on y
+TID=1 PREPARED successfully
+Coordinator PREPARED TID=1 success=true
+Coordinator START PreCommitPhase for TID=1
+Coordinator START PreparePhase for TID=1
+Server Prepare START for TID=1
+Server Prepare START for TID=1
+Server Prepare START for TID=1
+Coordinator PREPARED TID=1 success=true
+Coordinator START PreCommitPhase for TID=1
+Coordinator PRECOMMIT TID=1 success=true
+Coordinator START CommitPhase for TID=1
+Server Commit START for TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=1 COMMITTED with values: map[]
+Server Commit START for TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=1 COMMITTED with values: map[]
+Server Commit START for TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=1 COMMITTED with values: map[]
+Coordinator COMMITTED TID=1
+Coordinator START PreparePhase for TID=2
+Server Prepare START for TID=2
+TID=2 attempting 1 operations
+Server Prepare START for TID=2
+TID=2 trying Set on key=y
+TID=2 attempting 1 operations
+TID=2 trying Set on key=z
+TID=2 trying write on key=z
+TID=2 ACQUIRED write lock on z
+TID=2 PREPARED successfully
+TID=2 trying write on key=y
+Server Prepare START for TID=2
+TID=2 ACQUIRED write lock on y
+TID=2 PREPARED successfully
+TID=2 attempting 1 operations
+TID=2 trying Set on key=x
+TID=2 trying write on key=x
+TID=2 ACQUIRED write lock on x
+TID=2 PREPARED successfully
+Coordinator PREPARED TID=2 success=true
+Coordinator START PreCommitPhase for TID=2
+Coordinator START CommitPhase for TID=2
+Server Commit START for TID=2
+Server Commit START for TID=2
+ROLLBACK TID=2 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=2 COMMITTED with values: map[]
+Server Commit START for TID=2
+Coordinator COMMITTED TID=2
+Coordinator START PreparePhase for TID=3
+Server Prepare START for TID=3
+TID=3 attempting 1 operations
+TID=3 trying Set on key=y
+TID=3 trying write on key=y
+Server Prepare START for TID=3
+TID=3 attempting 1 operations
+TID=3 FAILED to acquire write lock on y
+TID=3 trying Set on key=z
+TID=3 trying write on key=z
+TID=3 ACQUIRED write lock on z
+ROLLBACK TID=3 releasing 0 locks
+Server Prepare START for TID=3
+TID=3 attempting 1 operations
+TID=3 trying Set on key=x
+TID=3 trying write on key=x
+TID=3 FAILED to acquire write lock on x
+ROLLBACK TID=3 releasing 0 locks
+TID=3 PREPARED successfully
+Coordinator PREPARED TID=3 success=false
+Coordinator ABORTING TID=3
+ROLLBACK TID=3 releasing 0 locks
+ROLLBACK TID=3 releasing 0 locks
+ROLLBACK TID=3 releasing 1 locks
+Releasing lock on key=z (write=true)
+    config.go:357: Transaction 3 expected to be committed but wasn't
+--- FAIL: TestRestartMidPreCommit (0.10s)
+FAIL
+exit status 1
+FAIL	cs351/3pc	0.141s
+=== RUN   TestRestartMidCommit
+TestRestartCommit: If the coordinator restarts in the middle of Commit, we commit ...
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=z
+TID=0 trying write on key=z
+TID=0 ACQUIRED write lock on z
+TID=0 PREPARED successfully
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=x
+TID=0 trying write on key=x
+TID=0 ACQUIRED write lock on x
+TID=0 PREPARED successfully
+Server Prepare START for TID=0
+TID=0 attempting 1 operations
+TID=0 trying Set on key=y
+TID=0 trying write on key=y
+TID=0 ACQUIRED write lock on y
+TID=0 PREPARED successfully
+Coordinator START PreparePhase for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Server Prepare START for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START PreCommitPhase for TID=0
+Coordinator PRECOMMIT TID=0 success=true
+Coordinator START CommitPhase for TID=0
+Coordinator PREPARED TID=0 success=true
+Coordinator START CommitPhase for TID=0
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=0 COMMITTED with values: map[]
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=0 COMMITTED with values: map[]
+Server Commit START for TID=0
+ROLLBACK TID=0 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=0 COMMITTED with values: map[]
+Coordinator COMMITTED TID=0
+Coordinator START PreparePhase for TID=1
+Server Prepare START for TID=1
+TID=1 attempting 1 operations
+TID=1 trying Set on key=x
+TID=1 trying write on key=x
+TID=1 ACQUIRED write lock on x
+TID=1 PREPARED successfully
+Server Prepare START for TID=1
+TID=1 attempting 1 operations
+Server Prepare START for TID=1
+TID=1 trying Set on key=z
+TID=1 attempting 1 operations
+TID=1 trying write on key=z
+TID=1 ACQUIRED write lock on z
+TID=1 PREPARED successfully
+TID=1 trying Set on key=y
+TID=1 trying write on key=y
+TID=1 ACQUIRED write lock on y
+TID=1 PREPARED successfully
+Coordinator PREPARED TID=1 success=true
+Coordinator START PreCommitPhase for TID=1
+Coordinator PRECOMMIT TID=1 success=true
+Coordinator START CommitPhase for TID=1
+Server Commit START for TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=1 COMMITTED with values: map[]
+Server Commit START for TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=1 COMMITTED with values: map[]
+Server Commit START for TID=1
+ROLLBACK TID=1 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=1 COMMITTED with values: map[]
+Coordinator COMMITTED TID=1
+Coordinator START PreparePhase for TID=2
+Server Prepare START for TID=2
+TID=2 attempting 1 operations
+TID=2 trying Set on key=y
+Server Prepare START for TID=2
+Server Prepare START for TID=2
+TID=2 attempting 1 operations
+TID=2 trying Set on key=z
+TID=2 trying write on key=z
+TID=2 ACQUIRED write lock on z
+TID=2 PREPARED successfully
+TID=2 attempting 1 operations
+TID=2 trying write on key=y
+TID=2 ACQUIRED write lock on y
+TID=2 PREPARED successfully
+TID=2 trying Set on key=x
+TID=2 trying write on key=x
+TID=2 ACQUIRED write lock on x
+TID=2 PREPARED successfully
+Coordinator PREPARED TID=2 success=true
+Coordinator START PreCommitPhase for TID=2
+Coordinator PRECOMMIT TID=2 success=true
+Coordinator START CommitPhase for TID=2
+Coordinator START CommitPhase for TID=2
+Server Commit START for TID=2
+ROLLBACK TID=2 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=2 COMMITTED with values: map[]
+Server Commit START for TID=2
+ROLLBACK TID=2 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=2 COMMITTED with values: map[]
+Server Commit START for TID=2
+ROLLBACK TID=2 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=2 COMMITTED with values: map[]
+Coordinator COMMITTED TID=2
+Coordinator START PreparePhase for TID=3
+Server Prepare START for TID=3
+TID=3 attempting 1 operations
+TID=3 trying Set on key=z
+TID=3 trying write on key=z
+TID=3 ACQUIRED write lock on z
+TID=3 PREPARED successfully
+Server Prepare START for TID=3
+TID=3 attempting 1 operations
+TID=3 trying Set on key=y
+TID=3 trying write on key=y
+TID=3 ACQUIRED write lock on y
+TID=3 PREPARED successfully
+Server Prepare START for TID=3
+TID=3 attempting 1 operations
+TID=3 trying Set on key=x
+TID=3 trying write on key=x
+TID=3 ACQUIRED write lock on x
+TID=3 PREPARED successfully
+Coordinator PREPARED TID=3 success=true
+Coordinator START PreCommitPhase for TID=3
+Coordinator PRECOMMIT TID=3 success=true
+Coordinator START CommitPhase for TID=3
+Coordinator START CommitPhase for TID=3
+Server Commit START for TID=3
+ROLLBACK TID=3 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=3 COMMITTED with values: map[]
+Server Commit START for TID=3
+ROLLBACK TID=3 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=3 COMMITTED with values: map[]
+Server Commit START for TID=3
+ROLLBACK TID=3 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=3 COMMITTED with values: map[]
+Coordinator COMMITTED TID=3
+Coordinator START PreparePhase for TID=4
+Server Prepare START for TID=4
+TID=4 attempting 1 operations
+TID=4 trying Set on key=z
+Server Prepare START for TID=4
+TID=4 trying write on key=z
+TID=4 ACQUIRED write lock on z
+Server Prepare START for TID=4
+TID=4 attempting 1 operations
+TID=4 trying Set on key=x
+TID=4 trying write on key=x
+TID=4 ACQUIRED write lock on x
+TID=4 PREPARED successfully
+TID=4 PREPARED successfully
+TID=4 attempting 1 operations
+TID=4 trying Set on key=y
+TID=4 trying write on key=y
+TID=4 ACQUIRED write lock on y
+TID=4 PREPARED successfully
+Coordinator PREPARED TID=4 success=true
+Coordinator START PreCommitPhase for TID=4
+Coordinator PRECOMMIT TID=4 success=true
+Coordinator START CommitPhase for TID=4
+Server Commit START for TID=4
+ROLLBACK TID=4 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=4 COMMITTED with values: map[]
+Coordinator START CommitPhase for TID=4
+Server Commit START for TID=4
+ROLLBACK TID=4 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=4 COMMITTED with values: map[]
+Server Commit START for TID=4
+ROLLBACK TID=4 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=4 COMMITTED with values: map[]
+Coordinator COMMITTED TID=4
+Coordinator START PreparePhase for TID=5
+Server Prepare START for TID=5
+TID=5 attempting 1 operations
+TID=5 trying Set on key=x
+TID=5 trying write on key=x
+TID=5 ACQUIRED write lock on x
+TID=5 PREPARED successfully
+Server Prepare START for TID=5
+TID=5 attempting 1 operations
+Server Prepare START for TID=5
+TID=5 attempting 1 operations
+TID=5 trying Set on key=y
+TID=5 trying write on key=y
+TID=5 ACQUIRED write lock on y
+TID=5 PREPARED successfully
+TID=5 trying Set on key=z
+TID=5 trying write on key=z
+TID=5 ACQUIRED write lock on z
+TID=5 PREPARED successfully
+Coordinator PREPARED TID=5 success=true
+Coordinator START PreCommitPhase for TID=5
+Coordinator PRECOMMIT TID=5 success=true
+Coordinator START CommitPhase for TID=5
+Coordinator START CommitPhase for TID=5
+Server Commit START for TID=5
+ROLLBACK TID=5 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=5 COMMITTED with values: map[]
+Server Commit START for TID=5
+ROLLBACK TID=5 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=5 COMMITTED with values: map[]
+Server Commit START for TID=5
+ROLLBACK TID=5 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=5 COMMITTED with values: map[]
+Coordinator COMMITTED TID=5
+Coordinator START PreparePhase for TID=6
+Server Prepare START for TID=6
+TID=6 attempting 1 operations
+TID=6 trying Set on key=x
+TID=6 trying write on key=x
+TID=6 ACQUIRED write lock on x
+Server Prepare START for TID=6
+TID=6 attempting 1 operations
+Server Prepare START for TID=6
+TID=6 trying Set on key=y
+TID=6 attempting 1 operations
+TID=6 trying write on key=y
+TID=6 trying Set on key=z
+TID=6 trying write on key=z
+TID=6 ACQUIRED write lock on z
+TID=6 ACQUIRED write lock on y
+TID=6 PREPARED successfully
+TID=6 PREPARED successfully
+TID=6 PREPARED successfully
+Coordinator PREPARED TID=6 success=true
+Coordinator START PreCommitPhase for TID=6
+Coordinator PRECOMMIT TID=6 success=true
+Coordinator START CommitPhase for TID=6
+Coordinator START CommitPhase for TID=6
+Server Commit START for TID=6
+ROLLBACK TID=6 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=6 COMMITTED with values: map[]
+Server Commit START for TID=6
+ROLLBACK TID=6 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=6 COMMITTED with values: map[]
+Server Commit START for TID=6
+ROLLBACK TID=6 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=6 COMMITTED with values: map[]
+Coordinator COMMITTED TID=6
+Coordinator START PreparePhase for TID=7
+Server Prepare START for TID=7
+TID=7 attempting 1 operations
+TID=7 trying Set on key=x
+TID=7 trying write on key=x
+TID=7 ACQUIRED write lock on x
+TID=7 PREPARED successfully
+Server Prepare START for TID=7
+TID=7 attempting 1 operations
+TID=7 trying Set on key=z
+TID=7 trying write on key=z
+TID=7 ACQUIRED write lock on z
+TID=7 PREPARED successfully
+Server Prepare START for TID=7
+TID=7 attempting 1 operations
+TID=7 trying Set on key=y
+TID=7 trying write on key=y
+TID=7 ACQUIRED write lock on y
+TID=7 PREPARED successfully
+Coordinator PREPARED TID=7 success=true
+Coordinator START PreCommitPhase for TID=7
+Coordinator PRECOMMIT TID=7 success=true
+Coordinator START CommitPhase for TID=7
+Server Commit START for TID=7
+ROLLBACK TID=7 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=7 COMMITTED with values: map[]
+Server Commit START for TID=7
+ROLLBACK TID=7 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=7 COMMITTED with values: map[]
+Server Commit START for TID=7
+Coordinator COMMITTED TID=4
+ROLLBACK TID=7 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=7 COMMITTED with values: map[]
+Coordinator COMMITTED TID=7
+Coordinator COMMITTED TID=3
+Coordinator START PreparePhase for TID=8
+Server Prepare START for TID=8
+TID=8 attempting 1 operations
+TID=8 trying Set on key=z
+TID=8 trying write on key=z
+Server Prepare START for TID=8
+TID=8 attempting 1 operations
+TID=8 trying Set on key=x
+TID=8 trying write on key=x
+TID=8 ACQUIRED write lock on x
+TID=8 PREPARED successfully
+TID=8 ACQUIRED write lock on z
+Server Prepare START for TID=8
+TID=8 attempting 1 operations
+TID=8 trying Set on key=y
+TID=8 trying write on key=y
+TID=8 ACQUIRED write lock on y
+TID=8 PREPARED successfully
+TID=8 PREPARED successfully
+Coordinator PREPARED TID=8 success=true
+Coordinator START PreCommitPhase for TID=8
+Coordinator COMMITTED TID=0
+Coordinator PRECOMMIT TID=8 success=true
+Coordinator START CommitPhase for TID=8
+Server Commit START for TID=8
+ROLLBACK TID=8 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=8 COMMITTED with values: map[]
+Coordinator START CommitPhase for TID=8
+Server Commit START for TID=8
+ROLLBACK TID=8 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=8 COMMITTED with values: map[]
+Server Commit START for TID=8
+ROLLBACK TID=8 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=8 COMMITTED with values: map[]
+Coordinator COMMITTED TID=8
+Coordinator START PreparePhase for TID=9
+Server Prepare START for TID=9
+TID=9 attempting 1 operations
+TID=9 trying Set on key=x
+TID=9 trying write on key=x
+TID=9 ACQUIRED write lock on x
+TID=9 PREPARED successfully
+Server Prepare START for TID=9
+TID=9 attempting 1 operations
+TID=9 trying Set on key=y
+TID=9 trying write on key=y
+TID=9 ACQUIRED write lock on y
+TID=9 PREPARED successfully
+Server Prepare START for TID=9
+TID=9 attempting 1 operations
+TID=9 trying Set on key=z
+TID=9 trying write on key=z
+TID=9 ACQUIRED write lock on z
+TID=9 PREPARED successfully
+Coordinator PREPARED TID=9 success=true
+Coordinator START PreCommitPhase for TID=9
+Coordinator PRECOMMIT TID=9 success=true
+Coordinator START CommitPhase for TID=9
+Server Commit START for TID=9
+ROLLBACK TID=9 releasing 1 locks
+Releasing lock on key=x (write=true)
+TID=9 COMMITTED with values: map[]
+Coordinator START CommitPhase for TID=9
+Server Commit START for TID=9
+ROLLBACK TID=9 releasing 1 locks
+Releasing lock on key=y (write=true)
+TID=9 COMMITTED with values: map[]
+Server Commit START for TID=9
+ROLLBACK TID=9 releasing 1 locks
+Releasing lock on key=z (write=true)
+TID=9 COMMITTED with values: map[]
+Coordinator COMMITTED TID=9
+  ... Passed --   0.2  3  137   11863    0
+--- PASS: TestRestartMidCommit (0.21s)
+PASS
+Coordinator COMMITTED TID=6
+Coordinator COMMITTED TID=2
+Coordinator COMMITTED TID=8
+Coordinator COMMITTED TID=9
+Coordinator COMMITTED TID=5
+ok  	cs351/3pc	1.245s
